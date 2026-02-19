@@ -46,6 +46,7 @@ const CONFIG = Object.freeze({
 
         headerSearchInput: '#header-search-input',
         headerSearchSubmit: '#header-search-submit',
+        desktopSearchToggle: '#desktop-search-toggle',
         mobileSearchToggle: '#mobile-search-toggle',
         mobileSearchBar: '#mobile-search-bar',
         mobileSearchInput: '#mobile-search-input',
@@ -409,11 +410,12 @@ const Data = {
         { id: 'espejos', name: 'Espejos', icon: 'checkroom', count: 5 },
         { id: 'estanterias', name: 'Estanterías', icon: 'shelves', count: 7 },
         { id: 'vanitory', name: 'Vanitorys', icon: 'water_drop', count: 4 },
-        { id: 'organizadores', name: 'Organizadores', icon: 'view_agenda', count: 9 }
+        { id: 'organizadores', name: 'Organizadores', icon: 'view_agenda', count: 9 },
+        { id: 'juegos', name: 'Juegos', icon: 'table_restaurant', count: 1 },
     ],
 
     products: [
-        { id: 1, cat: 'mesitas', name: '2 Mesitas 2 Cajones', dimensions: '92x40x33 cm', price: 126000, image: 'https://images.unsplash.com/photo-1532323544230-7191fd510c59?auto=format&fit=crop&w=400&q=80', featured: true, new: false },
+        { id: 1, cat: 'juegos', name: 'Juego de cocina (sin mesada)', dimensions: 'Bajo 1.37 x 80 x 52, Alacena 1.40 x 50 x 30, Campana 55 x 50 x 45', price: 360000, image: 'assets/juegodecocina.png', featured: true, new: false },
         { id: 2, cat: 'mesitas', name: 'Mesita Nórdica 3P', dimensions: '60x35x27 cm', price: 27000, image: 'https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=400&q=80', featured: false, new: true },
         { id: 3, cat: 'racks', name: 'Rack TV Nórdico 1.60', dimensions: '160x60x30 cm', price: 94000, image: 'https://images.unsplash.com/photo-1600121848594-d8644e57abab?auto=format&fit=crop&w=400&q=80', featured: true, new: false },
         { id: 4, cat: 'racks', name: 'Bahiut Multifuncional', dimensions: '140x90x40 cm', price: 190000, image: 'https://images.unsplash.com/photo-1595514020173-066c91d4e9d9?auto=format&fit=crop&w=400&q=80', featured: false, new: false },
@@ -660,24 +662,24 @@ const MobileMenuModule = {
 
 const SearchModule = {
     init() {
+        this.cacheDOM();
+        this.bindEvents();
+    },
+
+    cacheDOM() {
         this.modal = Utils.$(CONFIG.SELECTORS.searchModal);
         this.container = Utils.$(CONFIG.SELECTORS.searchContainer);
         this.input = Utils.$(CONFIG.SELECTORS.searchInput);
         this.results = Utils.$(CONFIG.SELECTORS.searchResults);
         this.closeBtn = Utils.$(CONFIG.SELECTORS.searchClose);
-
-        // Inline search inputs in header
-        this.headerInput = Utils.$(CONFIG.SELECTORS.headerSearchInput);
-        this.headerSubmit = Utils.$(CONFIG.SELECTORS.headerSearchSubmit);
-        this.mobileInput = Utils.$(CONFIG.SELECTORS.mobileSearchInput);
+        this.desktopToggle = Utils.$(CONFIG.SELECTORS.desktopSearchToggle);
 
         if (!this.modal) return;
-
-        this.bindEvents();
     },
 
     bindEvents() {
         this.closeBtn?.addEventListener('click', () => this.close());
+        this.desktopToggle?.addEventListener('click', () => this.open());
 
         this.modal?.addEventListener('click', (e) => {
             if (e.target === this.modal) this.close();

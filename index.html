@@ -51,44 +51,14 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap"
         rel="stylesheet">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
-        rel="stylesheet">
+    <link rel="stylesheet" href="assets/fonts/fonts.css">
 
-    <!-- Tailwind CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            50: '#faf6f1', 100: '#f0e6d6', 200: '#e0ccab', 300: '#cdac79',
-                            400: '#bf9355', 500: '#b07d3e', 600: '#966434', 700: '#7a4e2d',
-                            800: '#654029', 900: '#553625', 950: '#2f1b12',
-                        },
-                        accent: {
-                            50: '#fefbec', 100: '#fcf4cb', 200: '#f9e793', 300: '#f5d555',
-                            400: '#f0c02d', 500: '#daa520', 600: '#b8801a', 700: '#935e18',
-                            800: '#7a4a1b', 900: '#673d1c', 950: '#3c1f0b',
-                        },
-                        dark: {
-                            50: '#f7f5f2', 100: '#ece7df', 200: '#d9cfbf', 300: '#c3b299',
-                            400: '#ab9272', 500: '#997e5e', 600: '#836a4f', 700: '#6b5442',
-                            800: '#594639', 900: '#312720', 950: '#1a1410',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
-                        display: ['Playfair Display', 'Georgia', 'serif'],
-                    },
-                }
-            }
-        }
-    </script>
+    <!-- Tailwind CSS (compilado localmente) -->
+    <link rel="stylesheet" href="tailwind.css">
 
     <!-- Custom Styles -->
     <link rel="stylesheet" href="styles.css">
+
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -117,485 +87,8 @@
     }
     </script>
 
-    <!-- ====== CRITICAL INLINE CSS ====== -->
-    <style>
-        /* === Utilities === */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-
-        .scroll-progress {
-            transform: scaleX(var(--scroll-progress, 0));
-        }
-
-        /* === Reveal Animations === */
-        .reveal {
-            opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        .reveal--visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .stagger-1 {
-            transition-delay: 0.05s;
-        }
-
-        .stagger-2 {
-            transition-delay: 0.10s;
-        }
-
-        .stagger-3 {
-            transition-delay: 0.15s;
-        }
-
-        .stagger-4 {
-            transition-delay: 0.20s;
-        }
-
-        /* === Card System === */
-        .c-card {
-            background: #fff;
-            border-radius: 1rem;
-            overflow: hidden;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        .dark .c-card {
-            background: #1a1410;
-            border-color: rgba(255, 255, 255, 0.05);
-        }
-
-        .c-card--hover:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12);
-        }
-
-        .c-card__image {
-            position: relative;
-            overflow: hidden;
-            aspect-ratio: 4/3;
-        }
-
-        .c-card__image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        .c-card:hover .c-card__image img {
-            transform: scale(1.05);
-        }
-
-        .c-card__overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.45) 0%, transparent 50%);
-            opacity: 0;
-            transition: opacity 0.3s;
-            display: flex;
-            align-items: flex-end;
-            justify-content: flex-end;
-            padding: 1rem;
-        }
-
-        .c-card:hover .c-card__overlay {
-            opacity: 1;
-        }
-
-        .c-card__zoom {
-            color: #fff;
-            font-size: 1.25rem;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(8px);
-            border-radius: 50%;
-            padding: 0.5rem;
-        }
-
-        .c-card__body {
-            padding: 1.25rem;
-        }
-
-        .c-card__title {
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: #312720;
-            line-height: 1.3;
-        }
-
-        .dark .c-card__title {
-            color: #f7f5f2;
-        }
-
-        .c-card__meta {
-            font-size: 0.78rem;
-            color: #997e5e;
-            margin-top: 0.25rem;
-        }
-
-        .c-card__price {
-            font-weight: 700;
-            font-size: 1.05rem;
-            color: #b07d3e;
-            margin-top: 0.5rem;
-        }
-
-        .dark .c-card__price {
-            color: #daa520;
-        }
-
-        /* === Badges === */
-        .c-badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.25rem 0.75rem;
-            border-radius: 999px;
-            font-size: 0.62rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            backdrop-filter: blur(8px);
-        }
-
-        .c-badge--primary {
-            background: rgba(218, 165, 32, 0.9);
-            color: #1a1410;
-        }
-
-        .c-badge--secondary {
-            background: rgba(26, 20, 16, 0.7);
-            color: #fff;
-        }
-
-        /* === Chip (consult button) === */
-        .c-chip {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.25rem;
-            padding: 0.3rem 0.7rem;
-            border-radius: 999px;
-            font-size: 0.68rem;
-            font-weight: 600;
-            background: #faf6f1;
-            color: #7a4e2d;
-            border: 1px solid #e0ccab;
-            transition: all 0.2s;
-            white-space: nowrap;
-            flex-shrink: 0;
-            cursor: pointer;
-        }
-
-        .dark .c-chip {
-            background: #312720;
-            color: #daa520;
-            border-color: #554025;
-        }
-
-        .c-chip:hover {
-            background: #b07d3e;
-            color: #fff;
-            border-color: #b07d3e;
-        }
-
-        /* === Testimonial Card === */
-        .c-testimonial {
-            flex: 0 0 auto;
-            width: 340px;
-            background: #fff;
-            border-radius: 1.25rem;
-            padding: 2rem;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            scroll-snap-align: start;
-        }
-
-        .dark .c-testimonial {
-            background: #1a1410;
-            border-color: rgba(255, 255, 255, 0.05);
-        }
-
-        .c-testimonial__stars {
-            color: #daa520;
-            margin-bottom: 1rem;
-            display: flex;
-            gap: 2px;
-        }
-
-        .c-testimonial__stars .material-symbols-outlined {
-            font-size: 1rem;
-        }
-
-        .c-testimonial__text {
-            font-size: 0.92rem;
-            line-height: 1.7;
-            color: #594639;
-            margin-bottom: 1.5rem;
-        }
-
-        .dark .c-testimonial__text {
-            color: #c3b299;
-        }
-
-        .c-testimonial__author {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .c-testimonial__avatar {
-            width: 2.75rem;
-            height: 2.75rem;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #b07d3e, #daa520);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: #fff;
-        }
-
-        .c-testimonial__name {
-            font-weight: 600;
-            font-size: 0.88rem;
-            color: #312720;
-            font-style: normal;
-            display: block;
-        }
-
-        .dark .c-testimonial__name {
-            color: #f7f5f2;
-        }
-
-        .c-testimonial__location {
-            font-size: 0.75rem;
-            color: #997e5e;
-        }
-
-        /* === Form Inputs === */
-        .c-input {
-            width: 100%;
-            padding: 0.875rem 1rem;
-            background: #f7f5f2;
-            border: 1.5px solid transparent;
-            border-radius: 0.75rem;
-            font-size: 0.88rem;
-            transition: all 0.2s;
-            color: #312720;
-        }
-
-        .dark .c-input {
-            background: #1a1410;
-            color: #f7f5f2;
-        }
-
-        .c-input:focus {
-            outline: none;
-            border-color: #b07d3e;
-            box-shadow: 0 0 0 3px rgba(176, 125, 62, 0.1);
-        }
-
-        /* === Lightbox === */
-        .c-lightbox--active {
-            opacity: 1 !important;
-            visibility: visible !important;
-        }
-
-        .c-lightbox--active img {
-            transform: scale(1) !important;
-        }
-
-        /* === Toast === */
-        .c-toast--show {
-            opacity: 1 !important;
-            visibility: visible !important;
-            transform: translateX(-50%) translateY(0) !important;
-        }
-
-        /* === Image Zoom === */
-        .img-zoom {
-            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        .group:hover .img-zoom {
-            transform: scale(1.06);
-        }
-
-        /* === Nav Link Active Indicator === */
-        .nav-link {
-            position: relative;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%) scaleX(0);
-            width: 16px;
-            height: 2px;
-            background: currentColor;
-            border-radius: 999px;
-            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        .nav-link.active {
-            color: #b07d3e !important;
-        }
-
-        .dark .nav-link.active {
-            color: #daa520 !important;
-        }
-
-        .nav-link.active::after {
-            transform: translateX(-50%) scaleX(1);
-        }
-
-        /* === Cart Badge === */
-        .cart-badge {
-            position: absolute;
-            top: 2px;
-            right: 2px;
-            min-width: 16px;
-            height: 16px;
-            background: #daa520;
-            color: #1a1410;
-            font-size: 10px;
-            font-weight: 800;
-            border-radius: 999px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 1;
-            transform: scale(0);
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .cart-badge.has-items {
-            transform: scale(1);
-        }
-
-        /* === Cart Drawer === */
-        .cart-drawer {
-            transform: translateX(100%);
-            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        .cart-drawer.open {
-            transform: translateX(0);
-        }
-
-        .cart-backdrop {
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s;
-        }
-
-        .cart-backdrop.open {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* === Premium Gradient Text === */
-        .text-gradient {
-            background: linear-gradient(135deg, #daa520 0%, #f0c02d 50%, #daa520 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* === Grain Texture === */
-        .grain::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            opacity: 0.03;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        /* === Category Pills Fade Edges === */
-        .pills-container {
-            mask-image: linear-gradient(to right, transparent, #000 20px, #000 calc(100% - 20px), transparent);
-            -webkit-mask-image: linear-gradient(to right, transparent, #000 20px, #000 calc(100% - 20px), transparent);
-        }
-
-        @media (min-width: 1024px) {
-            .pills-container {
-                mask-image: none;
-                -webkit-mask-image: none;
-            }
-        }
-
-        /* === Add to Cart Shine === */
-        .btn-add-cart {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-add-cart::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.6s;
-        }
-
-        .btn-add-cart:hover::after {
-            transform: translateX(100%);
-        }
-
-        /* === Cart Drawer === */
-        .cart-backdrop {
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .cart-backdrop.hidden {
-            display: none;
-        }
-
-        .cart-drawer {
-            transform: translateX(100%);
-            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        .cart-drawer--open {
-            transform: translateX(0);
-        }
-
-        /* === Cart Badge === */
-        .cart-badge {
-            position: absolute;
-            top: 2px;
-            right: 2px;
-            background: #b07d3e;
-            color: #fff;
-            font-size: 10px;
-            font-weight: 700;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            line-height: 1;
-            transition: transform 0.2s ease;
-        }
-    </style>
 </head>
+
 
 <body class="bg-white text-dark-900 antialiased font-sans">
 
@@ -676,44 +169,59 @@
     <!-- ============ HEADER ============ -->
     <header id="header"
         class="fixed top-0 sm:top-8 left-0 right-0 z-50 bg-dark-950 shadow-lg transition-all duration-500">
-        <!-- Row 1: Logo + Search + Icons (dark brown background) -->
-        <div id="header-main" class="bg-dark-950">
-            <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
-                <div class="flex items-center justify-between gap-4 lg:gap-8 h-16 sm:h-[72px]">
 
-                    <!-- Left: Logo (enlarged) -->
+        <!-- Row 1: Logo left | Nav center | Icons right -->
+        <div id="header-main" class="bg-dark-950 border-b border-white/[0.06]">
+            <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
+                <div class="flex items-center justify-between h-[76px]">
+
+                    <!-- Left: Logo + Brand text -->
                     <a href="/" class="flex items-center gap-3 group flex-shrink-0"
                         aria-label="Legado Muebles - Inicio">
                         <img src="assets/logolegado.png" alt="Legado Muebles Logo"
-                            class="w-11 h-11 sm:w-16 sm:h-16 rounded-full object-cover shadow-lg group-hover:scale-105 transition-all duration-300">
-                        <div class="hidden sm:flex flex-col">
-                            <span class="text-lg font-bold tracking-[0.06em] text-white leading-none">LEGADO
+                            class="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover shadow-lg group-hover:scale-105 transition-all duration-300">
+                        <div class="hidden sm:flex flex-col justify-center">
+                            <span class="text-xl font-bold tracking-[0.06em] text-white leading-tight">LEGADO
                                 MUEBLES</span>
-                            <span class="text-[10px] font-semibold tracking-[0.2em] uppercase text-accent-500 mt-0.5">
+                            <span class="text-[11px] font-semibold tracking-[0.2em] uppercase text-accent-500 mt-0.5">
                                 SAN RAFAEL&nbsp;&middot;&nbsp;MENDOZA
                             </span>
                         </div>
                     </a>
 
-                    <!-- Center: Search Bar (large, inline) -->
-                    <div class="flex-1 max-w-2xl hidden sm:block">
-                        <div class="relative">
-                            <input type="text" id="header-search-input"
-                                class="w-full bg-white rounded-full py-2.5 pl-5 pr-12 text-sm text-dark-900 placeholder:text-dark-400 focus:outline-none focus:ring-2 focus:ring-accent-500/50 transition-all"
-                                placeholder="Buscar muebles, categorías, estilos..." autocomplete="off">
-                            <button id="header-search-submit"
-                                class="absolute right-1.5 top-1/2 -translate-y-1/2 bg-accent-500 hover:bg-accent-600 text-dark-950 p-2 rounded-full transition-colors"
-                                aria-label="Buscar">
-                                <span class="material-symbols-outlined text-lg leading-none">search</span>
-                            </button>
-                        </div>
-                    </div>
+                    <!-- Center: Nav categories (desktop only) -->
+                    <nav id="header-nav" class="hidden lg:flex items-center gap-0 flex-1 justify-center"
+                        role="navigation" aria-label="Navegación principal">
+                        <a href="#inicio"
+                            class="nav-link px-4 py-2 text-[11.5px] font-semibold uppercase tracking-[0.14em] text-dark-300 hover:text-accent-400 hover:bg-white/[0.05] rounded transition-all duration-200"
+                            data-section="inicio">Tienda</a>
 
-                    <!-- Right: Icons -->
-                    <div class="flex items-center gap-0.5 sm:gap-1">
+                        <a href="#amedida"
+                            class="nav-link px-4 py-2 text-[11.5px] font-semibold uppercase tracking-[0.14em] text-dark-300 hover:text-accent-400 hover:bg-white/[0.05] rounded transition-all duration-200"
+                            data-section="amedida">A Medida</a>
+                        <a href="#galeria"
+                            class="nav-link px-4 py-2 text-[11.5px] font-semibold uppercase tracking-[0.14em] text-dark-300 hover:text-accent-400 hover:bg-white/[0.05] rounded transition-all duration-200"
+                            data-section="galeria">Galería</a>
+                        <a href="#testimonios"
+                            class="nav-link px-4 py-2 text-[11.5px] font-semibold uppercase tracking-[0.14em] text-dark-300 hover:text-accent-400 hover:bg-white/[0.05] rounded transition-all duration-200"
+                            data-section="testimonios">Testimonios</a>
+                        <a href="#contacto"
+                            class="nav-link px-4 py-2 text-[11.5px] font-semibold uppercase tracking-[0.14em] text-dark-300 hover:text-accent-400 hover:bg-white/[0.05] rounded transition-all duration-200"
+                            data-section="contacto">Contacto</a>
+                    </nav>
+
+                    <!-- Right: Action icons -->
+                    <div class="flex items-center gap-0.5 sm:gap-1 flex-shrink-0">
                         <!-- Mobile search toggle -->
                         <button id="mobile-search-toggle"
                             class="sm:hidden p-2.5 text-dark-300 hover:text-white rounded-full hover:bg-white/10 transition-all"
+                            aria-label="Buscar">
+                            <span class="material-symbols-outlined text-[22px]">search</span>
+                        </button>
+
+                        <!-- Desktop Search Trigger -->
+                        <button id="desktop-search-toggle"
+                            class="hidden sm:flex p-2.5 text-dark-300 hover:text-white rounded-full hover:bg-white/10 transition-all"
                             aria-label="Buscar">
                             <span class="material-symbols-outlined text-[22px]">search</span>
                         </button>
@@ -749,11 +257,11 @@
                     </div>
                 </div>
 
-                <!-- Mobile Search Bar (hidden by default, shown on toggle) -->
+                <!-- Mobile Search Bar -->
                 <div id="mobile-search-bar" class="sm:hidden hidden pb-3">
                     <div class="relative">
                         <input type="text" id="mobile-search-input"
-                            class="w-full bg-white rounded-full py-2.5 pl-5 pr-12 text-sm text-dark-900 placeholder:text-dark-400 focus:outline-none focus:ring-2 focus:ring-accent-500/50"
+                            class="w-full bg-white rounded-full py-3 pl-5 pr-12 text-sm text-dark-900 placeholder:text-dark-400 focus:outline-none focus:ring-2 focus:ring-accent-500/50"
                             placeholder="Buscar muebles..." autocomplete="off">
                         <button
                             class="absolute right-1.5 top-1/2 -translate-y-1/2 bg-accent-500 hover:bg-accent-600 text-dark-950 p-2 rounded-full transition-colors"
@@ -765,35 +273,7 @@
             </div>
         </div>
 
-        <!-- Row 2: Navigation Categories (slightly lighter brown) -->
-        <div id="header-nav-bar" class="bg-dark-900 border-t border-white/[0.06] hidden lg:block">
-            <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
-                <nav id="header-nav" class="flex items-center justify-center gap-0" role="navigation"
-                    aria-label="Navegación principal">
-                    <a href="#inicio"
-                        class="nav-link px-4 py-2.5 text-[11.5px] font-semibold uppercase tracking-[0.14em] text-dark-300 hover:text-accent-400 hover:bg-white/[0.05] transition-all duration-200"
-                        data-section="inicio">Inicio</a>
-                    <a href="#nosotros"
-                        class="nav-link px-4 py-2.5 text-[11.5px] font-semibold uppercase tracking-[0.14em] text-dark-300 hover:text-accent-400 hover:bg-white/[0.05] transition-all duration-200"
-                        data-section="nosotros">Quiénes Somos</a>
-                    <a href="#productos"
-                        class="nav-link px-4 py-2.5 text-[11.5px] font-semibold uppercase tracking-[0.14em] text-dark-300 hover:text-accent-400 hover:bg-white/[0.05] transition-all duration-200"
-                        data-section="productos">Tienda Online ▾</a>
-                    <a href="#amedida"
-                        class="nav-link px-4 py-2.5 text-[11.5px] font-semibold uppercase tracking-[0.14em] text-dark-300 hover:text-accent-400 hover:bg-white/[0.05] transition-all duration-200"
-                        data-section="amedida">A Medida</a>
-                    <a href="#galeria"
-                        class="nav-link px-4 py-2.5 text-[11.5px] font-semibold uppercase tracking-[0.14em] text-dark-300 hover:text-accent-400 hover:bg-white/[0.05] transition-all duration-200"
-                        data-section="galeria">Galería</a>
-                    <a href="#testimonios"
-                        class="nav-link px-4 py-2.5 text-[11.5px] font-semibold uppercase tracking-[0.14em] text-dark-300 hover:text-accent-400 hover:bg-white/[0.05] transition-all duration-200"
-                        data-section="testimonios">Testimonios</a>
-                    <a href="#contacto"
-                        class="nav-link px-4 py-2.5 text-[11.5px] font-semibold uppercase tracking-[0.14em] text-dark-300 hover:text-accent-400 hover:bg-white/[0.05] transition-all duration-200"
-                        data-section="contacto">Contacto</a>
-                </nav>
-            </div>
-        </div>
+
 
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="lg:hidden hidden fixed inset-0 top-16 bg-dark-950 z-40 overflow-y-auto"
@@ -974,183 +454,14 @@
     </div>
 
     <!-- ============ MAIN ============ -->
-    <main id="main" class="pt-20 sm:pt-[7rem]">
+    <main id="main">
 
-        <!-- ======= HERO SLIDER ======= -->
-        <section id="inicio" class="relative remove-header-padding h-[600px] md:h-[750px] overflow-hidden group"
-            aria-label="Carrusel de imágenes principales">
-            <!-- Slides Container -->
-            <div id="hero-slides" class="h-full w-full relative">
-                <!-- Slide 1 (Active) -->
-                <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-100 z-10 hero-slide"
-                    data-index="0">
-                    <div class="absolute inset-0 bg-dark-950/40 z-10"></div>
-                    <img src="assets/legado.png" alt="Muebles a medida en San Rafael"
-                        class="w-full h-full object-cover">
-                    <div class="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4">
-                        <span
-                            class="inline-block py-1 px-3 rounded-full bg-brand-500/20 border border-brand-400 text-brand-300 text-sm font-semibold mb-6 backdrop-blur-sm reveal">
-                            DISEÑO & CALIDAD
-                        </span>
-                        <h1
-                            class="font-display font-bold text-4xl md:text-6xl lg:text-7xl text-white mb-6 leading-tight reveal stagger-1">
-                            Creamos el mueble<br />que soñás
-                        </h1>
-                        <p class="text-lg md:text-xl text-gray-200 max-w-2xl mb-10 reveal stagger-2">
-                            Fabricantes de muebles a medida en San Rafael. Melamina, MDF y madera maciza con
-                            terminaciones premium.
-                        </p>
-                        <div class="flex flex-col sm:flex-row gap-4 reveal stagger-3">
-                            <a href="#catalogo" class="c-btn c-btn--primary c-btn--lg c-btn--shine">
-                                <span>Ver Catálogo</span>
-                                <span class="material-symbols-outlined">arrow_downward</span>
-                            </a>
-                            <a href="#contacto"
-                                class="c-btn c-btn--outline text-white border-white hover:bg-white hover:text-dark-900 c-btn--lg">
-                                <span>Contactanos</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Slide 2 -->
-                <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 z-0 hero-slide"
-                    data-index="1">
-                    <div class="absolute inset-0 bg-dark-950/40 z-10"></div>
-                    <img src="https://images.unsplash.com/photo-1618220179428-22790b461013?q=80&w=1920&auto=format&fit=crop"
-                        alt="Diseños modernos para tu hogar" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 z-20 flex flex-col items-start justify-center px-6 md:px-20 lg:px-32">
-                        <span
-                            class="inline-block py-1 px-3 rounded-full bg-brand-500/20 border border-brand-400 text-brand-300 text-sm font-semibold mb-6 backdrop-blur-sm">
-                            TENDENCIA 2024
-                        </span>
-                        <h2
-                            class="font-display font-bold text-4xl md:text-6xl lg:text-7xl text-white mb-6 leading-tight text-left">
-                            Renová tus<br />ambientes
-                        </h2>
-                        <p class="text-lg md:text-xl text-gray-200 max-w-xl mb-10 text-left">
-                            Descubrí nuestra nueva colección de muebles de interior. Estilo, funcionalidad y confort
-                            para tu hogar.
-                        </p>
-                        <a href="#catalogo" class="c-btn c-btn--primary c-btn--lg c-btn--shine">
-                            <span>Ver Colección</span>
-                            <span class="material-symbols-outlined">arrow_forward</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Slide 3 -->
-                <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 z-0 hero-slide"
-                    data-index="2">
-                    <div class="absolute inset-0 bg-dark-950/40 z-10"></div>
-                    <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4f9d?q=80&w=1920&auto=format&fit=crop"
-                        alt="Calidad y durabilidad garantizada" class="w-full h-full object-cover">
-                    <div
-                        class="absolute inset-0 z-20 flex flex-col items-end justify-center px-6 md:px-20 lg:px-32 text-right">
-                        <span
-                            class="inline-block py-1 px-3 rounded-full bg-brand-500/20 border border-brand-400 text-brand-300 text-sm font-semibold mb-6 backdrop-blur-sm">
-                            100% PERSONALIZADO
-                        </span>
-                        <h2
-                            class="font-display font-bold text-4xl md:text-6xl lg:text-7xl text-white mb-6 leading-tight">
-                            A tu medida<br />y estilo
-                        </h2>
-                        <p class="text-lg md:text-xl text-gray-200 max-w-xl mb-10">
-                            Elegí materiales, colores y dimensiones. Nosotros nos encargamos de hacerlo realidad.
-                        </p>
-                        <a href="#contacto" class="c-btn c-btn--primary c-btn--lg c-btn--shine">
-                            <span>Pedir Presupuesto</span>
-                            <span class="material-symbols-outlined">request_quote</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Navigation Buttons -->
-            <button id="hero-prev"
-                class="absolute left-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/20 transition-all opacity-0 group-hover:opacity-100 focus:opacity-100"
-                aria-label="Anterior">
-                <span class="material-symbols-outlined text-3xl">chevron_left</span>
-            </button>
-            <button id="hero-next"
-                class="absolute right-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/20 transition-all opacity-0 group-hover:opacity-100 focus:opacity-100"
-                aria-label="Siguiente">
-                <span class="material-symbols-outlined text-3xl">chevron_right</span>
-            </button>
-
-            <!-- Indicators -->
-            <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex gap-3">
-                <button class="w-3 h-3 rounded-full bg-white transition-all hero-indicator active" data-index="0"
-                    aria-label="Ir a diapositiva 1"></button>
-                <button class="w-3 h-3 rounded-full bg-white/40 hover:bg-white/60 transition-all hero-indicator"
-                    data-index="1" aria-label="Ir a diapositiva 2"></button>
-                <button class="w-3 h-3 rounded-full bg-white/40 hover:bg-white/60 transition-all hero-indicator"
-                    data-index="2" aria-label="Ir a diapositiva 3"></button>
-            </div>
-        </section>
-
-        <!-- ======= FEATURES ======= -->
-        <section class="py-16 sm:py-20 bg-dark-950 relative overflow-hidden grain">
-            <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 relative z-10">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-white">
-                    <div class="flex items-start gap-4 reveal">
-                        <div
-                            class="flex-shrink-0 w-11 h-11 bg-accent-500/10 border border-accent-500/20 rounded-xl flex items-center justify-center">
-                            <span class="material-symbols-outlined text-lg text-accent-500">carpenter</span>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-sm mb-1">Fabricantes Directos</h3>
-                            <p class="text-white/40 text-[13px] leading-relaxed">Produccion propia sin
-                                intermediarios. Mejor precio y calidad.</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-4 reveal">
-                        <div
-                            class="flex-shrink-0 w-11 h-11 bg-accent-500/10 border border-accent-500/20 rounded-xl flex items-center justify-center">
-                            <span class="material-symbols-outlined text-lg text-accent-500">straighten</span>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-sm mb-1">Diseno a Medida</h3>
-                            <p class="text-white/40 text-[13px] leading-relaxed">Cada mueble se adapta
-                                perfectamente a tu espacio y estilo de vida.</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-4 reveal">
-                        <div
-                            class="flex-shrink-0 w-11 h-11 bg-accent-500/10 border border-accent-500/20 rounded-xl flex items-center justify-center">
-                            <span class="material-symbols-outlined text-lg text-accent-500">forest</span>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-sm mb-1">Materiales Premium</h3>
-                            <p class="text-white/40 text-[13px] leading-relaxed">Melamina sobre MDF y pino macizo
-                                con terminaciones impecables.</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-4 reveal">
-                        <div
-                            class="flex-shrink-0 w-11 h-11 bg-accent-500/10 border border-accent-500/20 rounded-xl flex items-center justify-center">
-                            <span class="material-symbols-outlined text-lg text-accent-500">local_shipping</span>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-sm mb-1">Envios a Todo el Pais</h3>
-                            <p class="text-white/40 text-[13px] leading-relaxed">Entregamos en Mendoza y toda
-                                Argentina con embalaje seguro.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
         <!-- ======= PRODUCTS ======= -->
-        <section id="productos" class="pt-8 pb-20 md:pt-12 md:pb-28 bg-white" aria-labelledby="productos-heading">
+        <section id="inicio" class="pt-8 pb-20 md:pt-12 md:pb-28 bg-white" aria-labelledby="productos-heading">
             <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
                 <div class="text-center mb-12 reveal">
-
-                    <h2 id="productos-heading"
-                        class="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-dark-900 mb-4">
-                        Tienda Online</h2>
-                    <p class="text-dark-400 max-w-xl mx-auto text-sm">Explora nuestra coleccion y compra online.
-                        Envios a Mendoza y toda Argentina.</p>
                 </div>
 
                 <!-- Category Pills -->
@@ -1460,9 +771,25 @@
         Sin conexion - Mostrando contenido guardado
     </div>
 
-    <!-- Scripts -->
+    <!-- Dynamic header offset: measures real header height and applies it to main -->
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        function updateMainOffset() {
+            const header = document.getElementById('header');
+            const topBar = document.getElementById('top-bar');
+            const main = document.getElementById('main');
+            if (!header || !main) return;
+            // Include top-bar height only when it's visible (sm: and above)
+            const topBarH = (topBar && getComputedStyle(topBar).display !== 'none') ? topBar.offsetHeight : 0;
+            main.style.paddingTop = (topBarH + header.offsetHeight) + 'px';
+        }
+
+        // Run on load and on resize
+        window.addEventListener('DOMContentLoaded', updateMainOffset);
+        window.addEventListener('resize', updateMainOffset);
+        // Also run after a short delay to catch any late rendering
+        setTimeout(updateMainOffset, 100);
     </script>
     <script src="main.js" defer></script>
 </body>
