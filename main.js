@@ -1,5 +1,11 @@
 'use strict';
 
+// Evitar que el navegador restaure posición de scroll
+if (history.scrollRestoration) {
+    history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
+
 /* ═══════════════════════════════════════════════════════════════════════════════
    1. CONFIG - Global Configuration
    ═══════════════════════════════════════════════════════════════════════════════ */
@@ -2005,6 +2011,22 @@ const App = {
 
 
 App.init();
+
+// Recalcular offset del header cuando todo termina de cargar
+window.addEventListener('load', () => {
+    window.scrollTo(0, 0);
+
+    const header = document.getElementById('header');
+    const topBar = document.getElementById('top-bar');
+    const main = document.getElementById('main');
+
+    if (!header || !main) return;
+
+    const topBarH = (topBar && getComputedStyle(topBar).display !== 'none')
+        ? topBar.offsetHeight
+        : 0;
+    main.style.paddingTop = (topBarH + header.offsetHeight) + 'px';
+});
 
 /* ═══════════════════════════════════════════════════════════════════════════════
    8. SERVICE WORKER REGISTRATION (PWA)

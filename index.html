@@ -56,8 +56,14 @@
     <!-- Tailwind CSS (compilado localmente) -->
     <link rel="stylesheet" href="tailwind.css">
 
-    <!-- Custom Styles -->
-    <link rel="stylesheet" href="styles.css">
+    <!-- Forzar scroll al inicio en cada carga -->
+    <script>
+        if (history.scrollRestoration) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+    </script>
+
 
 
     <!-- Structured Data -->
@@ -454,14 +460,25 @@
     </div>
 
     <!-- ============ MAIN ============ -->
-    <main id="main">
-
-
+    <main id="main" class="pt-[100px] sm:pt-[132px]">
 
         <!-- ======= PRODUCTS ======= -->
-        <section id="inicio" class="pt-8 pb-20 md:pt-12 md:pb-28 bg-white" aria-labelledby="productos-heading">
+        <section id="inicio" class="pt-4 pb-20 md:pt-6 md:pb-28 bg-white" aria-labelledby="productos-heading">
             <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
-                <div class="text-center mb-12 reveal">
+
+                <!-- Store Header -->
+                <div class="text-center mb-10 md:mb-14 reveal">
+                    <span
+                        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-100 text-brand-700 font-semibold text-[11px] uppercase tracking-[0.15em] mb-4">Tienda
+                        Online</span>
+                    <h1 id="productos-heading"
+                        class="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-dark-900 mb-4">Nuestros
+                        Muebles</h1>
+                    <p class="text-dark-500 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
+                        Explorá nuestro catálogo de muebles fabricados con materiales de primera calidad. Diseños
+                        funcionales y modernos para cada espacio de tu hogar, con envío directo desde nuestra fábrica en
+                        San Rafael.
+                    </p>
                 </div>
 
                 <!-- Category Pills -->
@@ -771,25 +788,9 @@
         Sin conexion - Mostrando contenido guardado
     </div>
 
-    <!-- Dynamic header offset: measures real header height and applies it to main -->
+    <!-- DESPUÉS -->
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
-
-        function updateMainOffset() {
-            const header = document.getElementById('header');
-            const topBar = document.getElementById('top-bar');
-            const main = document.getElementById('main');
-            if (!header || !main) return;
-            // Include top-bar height only when it's visible (sm: and above)
-            const topBarH = (topBar && getComputedStyle(topBar).display !== 'none') ? topBar.offsetHeight : 0;
-            main.style.paddingTop = (topBarH + header.offsetHeight) + 'px';
-        }
-
-        // Run on load and on resize
-        window.addEventListener('DOMContentLoaded', updateMainOffset);
-        window.addEventListener('resize', updateMainOffset);
-        // Also run after a short delay to catch any late rendering
-        setTimeout(updateMainOffset, 100);
     </script>
     <script src="main.js" defer></script>
 </body>
