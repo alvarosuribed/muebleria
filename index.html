@@ -53,8 +53,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="assets/fonts/fonts.css">
 
-    <!-- Tailwind CSS (compilado localmente) -->
-    <link rel="stylesheet" href="tailwind.css">
+    <link rel="stylesheet" href="styles.css">
 
     <!-- Forzar scroll al inicio en cada carga -->
     <script>
@@ -393,8 +392,8 @@
         <div id="cart-items" class="flex-1 overflow-y-auto p-6">
             <div id="cart-empty" class="flex flex-col items-center justify-center h-full text-center">
                 <span class="material-symbols-outlined text-5xl text-dark-200 mb-4">shopping_bag</span>
-                <p class="text-dark-400 font-medium mb-2">Tu carrito esta vacio</p>
-                <p class="text-dark-300 text-sm">Explora nuestro catalogo y agrega productos</p>
+                <p class="text-dark-400 font-medium mb-2">Tu carrito está vacío</p>
+                <p class="text-dark-300 text-sm">Explorá nuestro catálogo y agregá productos</p>
             </div>
             <div id="cart-items-list" class="space-y-4 hidden"></div>
         </div>
@@ -405,7 +404,7 @@
                 <span class="text-dark-500 font-medium">Subtotal</span>
                 <span id="cart-subtotal" class="text-xl font-bold text-dark-900">$0</span>
             </div>
-            <p class="text-xs text-dark-400">Envio calculado al finalizar la compra</p>
+            <p class="text-xs text-dark-400">Envío calculado al finalizar la compra</p>
             <button id="cart-checkout-btn"
                 class="w-full bg-dark-900 hover:bg-dark-800 text-white py-3.5 rounded-xl font-bold text-sm tracking-wide transition-all hover:-translate-y-0.5 hover:shadow-lg flex items-center justify-center gap-2">
                 <span class="material-symbols-outlined text-lg">lock</span>
@@ -435,7 +434,7 @@
                             class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-dark-400">search</span>
                         <input type="search" id="search-input"
                             class="w-full pl-12 pr-12 py-4 text-lg bg-transparent border-0 focus:ring-0 focus:outline-none placeholder:text-dark-400 text-dark-900"
-                            placeholder="Buscar productos, categorias..." autocomplete="off">
+                            placeholder="Buscar productos, categorías..." autocomplete="off">
                         <button id="search-close"
                             class="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 text-dark-400 hover:text-dark-600 rounded-lg transition-colors"
                             aria-label="Cerrar">
@@ -446,7 +445,7 @@
                 <div id="search-results" class="max-h-[60vh] overflow-y-auto p-4">
                     <p class="text-center text-dark-400 py-12">
                         <span class="material-symbols-outlined text-4xl mb-3 block opacity-50">search</span>
-                        Escribi para buscar productos...
+                        Escribí para buscar productos...
                     </p>
                 </div>
                 <div class="p-3 border-t border-dark-100 text-xs text-dark-400 flex items-center justify-between">
@@ -460,19 +459,20 @@
     </div>
 
     <!-- ============ MAIN ============ -->
-    <main id="main" class="pt-[100px] sm:pt-[132px]">
+    <main id="main" class="pt-[120px] sm:pt-[164px]">
 
         <!-- ======= PRODUCTS ======= -->
-        <section id="inicio" class="pt-4 pb-20 md:pt-6 md:pb-28 bg-white" aria-labelledby="productos-heading">
+        <section id="inicio" class="pt-6 pb-20 md:pt-10 md:pb-28 bg-white" aria-labelledby="productos-heading">
             <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
 
                 <!-- Store Header -->
                 <div class="text-center mb-10 md:mb-14 reveal">
                     <span
-                        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-100 text-brand-700 font-semibold text-[11px] uppercase tracking-[0.15em] mb-4">Tienda
+                        class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-dark-950/5 border border-dark-900/10 text-dark-800 font-semibold text-xs uppercase tracking-[0.2em] mb-6 shadow-sm">Tienda
                         Online</span>
                     <h1 id="productos-heading"
-                        class="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-dark-900 mb-4">Nuestros
+                        class="text-4xl md:text-5xl lg:text-6xl font-display font-black text-dark-950 mb-6 tracking-tight">
+                        Nuestros
                         Muebles</h1>
                     <p class="text-dark-500 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
                         Explorá nuestro catálogo de muebles fabricados con materiales de primera calidad. Diseños
@@ -484,7 +484,7 @@
                 <!-- Category Pills -->
                 <div id="category-pills"
                     class="pills-container flex gap-2 mb-12 reveal overflow-x-auto pb-3 -mx-5 px-5 snap-x snap-mandatory no-scrollbar lg:flex-wrap lg:justify-center lg:overflow-visible lg:mx-0 lg:px-0 lg:pb-0"
-                    role="tablist" aria-label="Categorias"></div>
+                    role="tablist" aria-label="Categorías"></div>
 
                 <!-- Products Grid -->
                 <div id="products-grid"
@@ -495,7 +495,7 @@
                 <div class="mt-14 text-center">
                     <button id="load-more-btn"
                         class="inline-flex items-center gap-2 border border-dark-200 hover:bg-dark-50 text-dark-600 px-8 py-3.5 rounded-full font-semibold text-sm transition-all duration-300 hover:shadow-sm">
-                        Cargar mas productos
+                        Cargar más productos
                         <span class="material-symbols-outlined text-lg">expand_more</span>
                     </button>
                 </div>
@@ -537,15 +537,15 @@
                         </h2>
 
                         <p class="text-white/45 text-base leading-relaxed">
-                            Nos especializamos en fabricacion a medida. Desde placares y vestidores hasta cocinas
-                            integrales y muebles de diseno. Cada proyecto refleja tu personalidad.
+                            Nos especializamos en fabricación a medida. Desde placares y vestidores hasta cocinas
+                            integrales y muebles de diseño. Cada proyecto refleja tu personalidad.
                         </p>
 
                         <ul class="space-y-4">
                             <li class="flex items-start gap-3">
                                 <span class="material-symbols-outlined text-accent-500 flex-shrink-0 mt-0.5"
                                     style="font-variation-settings: 'FILL' 1;">check_circle</span>
-                                <span class="text-white/70 text-sm"><strong class="text-white font-medium">Medicion
+                                <span class="text-white/70 text-sm"><strong class="text-white font-medium">Medición
                                         a domicilio</strong> y asesoramiento personalizado gratuito.</span>
                             </li>
                             <li class="flex items-start gap-3">
@@ -559,13 +559,13 @@
                                 <span class="material-symbols-outlined text-accent-500 flex-shrink-0 mt-0.5"
                                     style="font-variation-settings: 'FILL' 1;">check_circle</span>
                                 <span class="text-white/70 text-sm"><strong class="text-white font-medium">Herrajes
-                                        premium</strong> con guias
-                                    telescopicas y cierre suave.</span>
+                                        premium</strong> con guías
+                                    telescópicas y cierre suave.</span>
                             </li>
                             <li class="flex items-start gap-3">
                                 <span class="material-symbols-outlined text-accent-500 flex-shrink-0 mt-0.5"
                                     style="font-variation-settings: 'FILL' 1;">check_circle</span>
-                                <span class="text-white/70 text-sm"><strong class="text-white font-medium">Instalacion
+                                <span class="text-white/70 text-sm"><strong class="text-white font-medium">Instalación
                                         profesional</strong> incluida
                                     en todos los proyectos.</span>
                             </li>
@@ -606,7 +606,7 @@
                         <span
                             class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-100 text-brand-700 font-semibold text-[11px] uppercase tracking-[0.15em] mb-4">Testimonios</span>
                         <h2 id="testimonios-heading" class="text-3xl md:text-4xl font-display font-bold text-dark-900">
-                            Clientes que confian en nosotros</h2>
+                            Clientes que confían en nosotros</h2>
                     </div>
                     <div class="flex gap-2">
                         <button id="testimonial-prev"
@@ -638,7 +638,7 @@
                         </div>
                         <h2 id="cotizador-heading"
                             class="text-2xl md:text-3xl font-display font-bold text-dark-900 mb-3">
-                            Pedi tu Presupuesto</h2>
+                            Pedí tu Presupuesto</h2>
                         <p class="text-dark-400 max-w-md mx-auto text-sm">Completa el formulario y te contactamos
                             con una propuesta personalizada en menos de 24hs.</p>
                     </div>
@@ -656,7 +656,7 @@
                     <h2 id="contacto-heading" class="text-3xl md:text-4xl font-display font-bold text-dark-900 mb-4">
                         Visita Nuestro Showroom</h2>
                     <p class="text-dark-400 max-w-xl mx-auto text-sm">Estamos en Av. Mitre 839, San Rafael,
-                        Mendoza. Veni a conocer nuestros muebles en persona.</p>
+                        Mendoza. Vení a conocer nuestros muebles en persona.</p>
                 </div>
                 <div id="contact-cards" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12" role="list"></div>
                 <!-- Google Maps Embed -->
@@ -689,14 +689,14 @@
                     </a>
                     <p class="text-dark-500 leading-relaxed mb-6 max-w-md text-sm">
                         Fabricantes de muebles a medida en San Rafael, Mendoza. Trabajamos con melamina sobre MDF y
-                        pino macizo de primera calidad para crear piezas unicas que transforman tu hogar.
+                        pino macizo de primera calidad para crear piezas únicas que transforman tu hogar.
                     </p>
                     <div class="flex gap-3" id="footer-social"></div>
                 </div>
 
                 <!-- Navigation -->
                 <div>
-                    <h3 class="font-semibold text-xs uppercase tracking-[0.15em] mb-5 text-white/60">Navegacion
+                    <h3 class="font-semibold text-xs uppercase tracking-[0.15em] mb-5 text-white/60">Navegación
                     </h3>
                     <ul class="space-y-3">
                         <li><a href="#inicio"
@@ -739,11 +739,7 @@
                 </div>
             </div>
 
-            <div class="border-t border-white/[0.06] pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-dark-600 text-xs">&copy; <span id="current-year"></span> Legado Muebles. Todos los
-                    derechos reservados.</p>
-                <p class="text-dark-700 text-xs">@Legadomuebles.sr</p>
-            </div>
+
         </div>
     </footer>
 
@@ -789,9 +785,6 @@
     </div>
 
     <!-- DESPUÉS -->
-    <script>
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-    </script>
     <script src="main.js" defer></script>
 </body>
 
