@@ -6,6 +6,24 @@ if (history.scrollRestoration) {
 }
 window.scrollTo(0, 0);
 
+// ──── Firebase init (read-only, for loading products from Firestore) ────
+let firestoreDb = null;
+try {
+    if (typeof firebase !== 'undefined') {
+        firebase.initializeApp({
+            apiKey: "AIzaSyAEQa7AYaMsvkPqRVJk9dbxssZo7zSZtdM",
+            authDomain: "legado-muebles.firebaseapp.com",
+            projectId: "legado-muebles",
+            storageBucket: "legado-muebles.firebasestorage.app",
+            messagingSenderId: "1052909613484",
+            appId: "1:1052909613484:web:dfa568ff7320eab98c4a09"
+        });
+        firestoreDb = firebase.firestore();
+    }
+} catch (e) {
+    console.warn('Firebase init skipped:', e.message);
+}
+
 /* ═══════════════════════════════════════════════════════════════════════════════
    1. CONFIG - Global Configuration
    ═══════════════════════════════════════════════════════════════════════════════ */
@@ -39,7 +57,7 @@ const CONFIG = Object.freeze({
     },
 
     MAX_RECENT_VIEWS: 10,
-    PRODUCTS_PER_PAGE: 12,
+    PRODUCTS_PER_PAGE: 999,
     MAX_FAVORITES: 50,
 
     SELECTORS: {
@@ -421,30 +439,8 @@ const Data = {
     ],
 
     products: [
-        { id: 1, cat: 'juegos', name: 'Juego de cocina (sin mesada)', dimensions: 'Bajo 1.37 x 80 x 52, Alacena 1.40 x 50 x 30, Campana 55 x 50 x 45', price: 360000, image: 'assets/juegodecocina.png', featured: true, new: false },
-        { id: 2, cat: 'mesitas', name: 'Mesita Nórdica 3P', dimensions: '60x35x27 cm', price: 27000, image: 'https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=400&q=80', featured: false, new: true },
-        { id: 3, cat: 'racks', name: 'Rack TV Nórdico 1.60', dimensions: '160x60x30 cm', price: 94000, image: 'https://images.unsplash.com/photo-1600121848594-d8644e57abab?auto=format&fit=crop&w=400&q=80', featured: true, new: false },
-        { id: 4, cat: 'racks', name: 'Bahiut Multifuncional', dimensions: '140x90x40 cm', price: 190000, image: 'https://images.unsplash.com/photo-1595514020173-066c91d4e9d9?auto=format&fit=crop&w=400&q=80', featured: false, new: false },
-        { id: 5, cat: 'escritorios', name: 'Escritorio Nórdico', dimensions: '120x50 cm', price: 182000, image: 'https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&w=400&q=80', featured: true, new: false },
-        { id: 6, cat: 'escritorios', name: 'Escritorio con Estantes', dimensions: 'Standard', price: 159000, image: 'https://images.unsplash.com/photo-1515542706656-8e6ef1763e38?auto=format&fit=crop&w=400&q=80', featured: false, new: true },
-        { id: 7, cat: 'cocina', name: 'Bajo Mesada en L', dimensions: 'A medida', price: 1100000, image: 'https://images.unsplash.com/photo-1556910103-1c02745a30bf?auto=format&fit=crop&w=400&q=80', featured: true, new: false },
-        { id: 8, cat: 'cocina', name: 'Alacena y Bajo', dimensions: '140 cm ancho', price: 340000, image: 'https://images.unsplash.com/photo-1484154218962-a197022b25ba?auto=format&fit=crop&w=400&q=80', featured: false, new: false },
-        { id: 9, cat: 'roperos', name: 'Ropero 6 Puertas', dimensions: '230x180 cm', price: 850000, image: 'https://images.unsplash.com/photo-1595515106968-4319803d5264?auto=format&fit=crop&w=400&q=80', featured: true, new: false },
-        { id: 10, cat: 'espejos', name: 'Espejo Cuerpo Entero', dimensions: '180x70 cm', price: 192000, image: 'https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=400&q=80', featured: false, new: true },
-        { id: 11, cat: 'estanterias', name: 'Estantería Flotante', dimensions: '120x30 cm', price: 85000, image: 'https://images.unsplash.com/photo-1594620302200-9a762244a156?auto=format&fit=crop&w=400&q=80', featured: false, new: false },
-        { id: 12, cat: 'vanitory', name: 'Vanitory Suspendido', dimensions: '80x45 cm', price: 245000, image: 'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=400&q=80', featured: true, new: false },
-        { id: 13, cat: 'mesitas', name: 'Mesita Minimalista', dimensions: '45x45x50 cm', price: 35000, image: 'https://images.unsplash.com/photo-1532323544230-7191fd510c59?auto=format&fit=crop&w=400&q=80', featured: false, new: false },
-        { id: 14, cat: 'racks', name: 'Mueble TV Flotante', dimensions: '180x35x30 cm', price: 115000, image: 'https://images.unsplash.com/photo-1600121848594-d8644e57abab?auto=format&fit=crop&w=400&q=80', featured: false, new: true },
-        { id: 15, cat: 'escritorios', name: 'Escritorio Gamer', dimensions: '140x70 cm', price: 210000, image: 'https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&w=400&q=80', featured: true, new: false },
-        { id: 16, cat: 'cocina', name: 'Isla de Cocina', dimensions: '120x80x90 cm', price: 450000, image: 'https://images.unsplash.com/photo-1556910103-1c02745a30bf?auto=format&fit=crop&w=400&q=80', featured: false, new: false },
-        { id: 17, cat: 'roperos', name: 'Placard Corredizo', dimensions: '180x240 cm', price: 620000, image: 'https://images.unsplash.com/photo-1595515106968-4319803d5264?auto=format&fit=crop&w=400&q=80', featured: false, new: true },
-        { id: 18, cat: 'espejos', name: 'Espejo Redondo', dimensions: 'Ø 80 cm', price: 75000, image: 'https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=400&q=80', featured: true, new: false },
-        { id: 19, cat: 'estanterias', name: 'Biblioteca Industrial', dimensions: '180x80x30 cm', price: 145000, image: 'https://images.unsplash.com/photo-1594620302200-9a762244a156?auto=format&fit=crop&w=400&q=80', featured: false, new: false },
-        { id: 20, cat: 'vanitory', name: 'Vanitory Doble Bachas', dimensions: '140x50 cm', price: 380000, image: 'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=400&q=80', featured: true, new: true },
-        { id: 21, cat: 'organizadores', name: 'Organizador Juguetes', dimensions: '100x80x40 cm', price: 95000, image: 'https://images.unsplash.com/photo-1595514020173-066c91d4e9d9?auto=format&fit=crop&w=400&q=80', featured: false, new: false },
-        { id: 22, cat: 'organizadores', name: 'Zapatero Vertical', dimensions: '180x50x25 cm', price: 82000, image: 'https://images.unsplash.com/photo-1595515106968-4319803d5264?auto=format&fit=crop&w=400&q=80', featured: false, new: false },
-        { id: 23, cat: 'mesitas', name: 'Mesita Flotante', dimensions: '40x35x15 cm', price: 22000, image: 'https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=400&q=80', featured: false, new: false },
-        { id: 24, cat: 'racks', name: 'Panel TV', dimensions: '160x120 cm', price: 65000, image: 'https://images.unsplash.com/photo-1600121848594-d8644e57abab?auto=format&fit=crop&w=400&q=80', featured: false, new: false }
+        // Products are loaded from Firestore at runtime.
+        // This empty array serves as fallback if Firestore is unavailable.
     ],
 
     testimonials: [
@@ -579,22 +575,21 @@ const HeaderModule = {
 
         if (scrollY > 50) {
             this.header.classList.add(CONFIG.CLASSES.scrolled);
-
-            // Hide top bar on scroll and slide header up
-            if (this.topBar) {
-                this.topBar.style.transform = 'translateY(-100%)';
-                this.topBar.style.opacity = '0';
-            }
-            this.header.style.top = '0';
         } else {
             this.header.classList.remove(CONFIG.CLASSES.scrolled);
+        }
 
-            // Show top bar
-            if (this.topBar) {
-                this.topBar.style.transform = 'translateY(0)';
-                this.topBar.style.opacity = '1';
+        // Top bar: ocultar/mostrar con CSS, sin mover el header
+        if (this.topBar) {
+            if (scrollY > 50) {
+                this.topBar.style.transform = 'translateY(-100%)';
+                this.topBar.style.opacity = '0';
+                this.topBar.style.pointerEvents = 'none';
+            } else {
+                this.topBar.style.transform = '';
+                this.topBar.style.opacity = '';
+                this.topBar.style.pointerEvents = '';
             }
-            this.header.style.top = '';
         }
 
         const progress = Utils.getScrollPercentage();
@@ -685,7 +680,27 @@ const SearchModule = {
 
     bindEvents() {
         this.closeBtn?.addEventListener('click', () => this.close());
-        this.desktopToggle?.addEventListener('click', () => this.open());
+        this.desktopInput = Utils.$('#desktop-search-input');
+
+        this.desktopInput?.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && e.target.value.trim()) {
+                this.open();
+                if (this.input) {
+                    this.input.value = e.target.value;
+                    this.search(e.target.value);
+                }
+            }
+        });
+
+        this.desktopInput?.addEventListener('input', Utils.debounce((e) => {
+            if (e.target.value.trim()) {
+                this.open();
+                if (this.input) {
+                    this.input.value = e.target.value;
+                    this.search(e.target.value);
+                }
+            }
+        }, 400));
 
         this.modal?.addEventListener('click', (e) => {
             if (e.target === this.modal) this.close();
@@ -701,33 +716,20 @@ const SearchModule = {
             this.search(e.target.value);
         }, 200));
 
-        // Wire inline header search
-        const openWithQuery = (query) => {
-            this.open();
-            if (this.input) {
-                this.input.value = query;
-                this.search(query);
-            }
-        };
-
-        this.headerInput?.addEventListener('keydown', (e) => {
+        // Mobile search input
+        const mobileInput = Utils.$('#mobile-search-input');
+        mobileInput?.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 e.preventDefault();
-                openWithQuery(e.target.value);
-            }
-        });
-
-        this.headerSubmit?.addEventListener('click', () => {
-            if (this.headerInput) openWithQuery(this.headerInput.value);
-        });
-
-        this.mobileInput?.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                openWithQuery(e.target.value);
+                this.open();
+                if (this.input) {
+                    this.input.value = e.target.value;
+                    this.search(e.target.value);
+                }
             }
         });
     },
+
 
     toggle() {
         AppStore.get('searchModalOpen') ? this.close() : this.open();
@@ -777,37 +779,45 @@ const SearchModule = {
 
     renderEmptyState() {
         this.results.innerHTML = `
-            <p class="text-center text-dark-400 py-12">
-                <span class="material-symbols-outlined text-4xl mb-3 block opacity-50" aria-hidden="true">search</span>
-                Escribí para buscar productos...
-            </p>
+            <div class="search-empty">
+                <span class="material-symbols-outlined" aria-hidden="true">search</span>
+                <p>Escribí para buscar productos...</p>
+            </div>
         `;
     },
 
     renderResults(results, query) {
         if (results.length === 0) {
             this.results.innerHTML = `
-                <p class="text-center text-dark-400 py-12">
-                    <span class="material-symbols-outlined text-4xl mb-3 block opacity-50" aria-hidden="true">search_off</span>
-                    No se encontraron resultados para "${Utils.escapeHtml(query)}"
-                </p>
+                <div class="search-empty">
+                    <span class="material-symbols-outlined" aria-hidden="true">search_off</span>
+                    <p>No se encontraron resultados para "${Utils.escapeHtml(query)}"</p>
+                    <span class="search-empty-hint">Probá con otro término o categoría</span>
+                </div>
             `;
             return;
         }
 
-        this.results.innerHTML = results.map(product => `
-            <a href="#productos" 
-               class="flex items-center gap-4 p-3 rounded-xl hover:bg-dark-50 transition-colors"
-               onclick="SearchModule.close(); ProductsModule.filterByCategory('${product.cat}');">
-                <img src="${product.image}" alt="${product.name}" class="w-16 h-16 object-cover rounded-lg" loading="lazy">
-                <div class="flex-1 min-w-0">
-                    <h4 class="font-semibold text-dark-900 truncate">${product.name}</h4>
-                    <p class="text-sm text-dark-400">${product.dimensions}</p>
-                    <p class="text-sm font-bold text-brand-600">${Utils.formatCurrency(product.price)}</p>
-                </div>
-                <span class="material-symbols-outlined text-dark-300" aria-hidden="true">arrow_forward</span>
-            </a>
-        `).join('');
+        const catName = (catId) => Data.categories.find(c => c.id === catId)?.name || catId;
+
+        this.results.innerHTML = `
+            <div class="search-count">${results.length} resultado${results.length > 1 ? 's' : ''} para "${Utils.escapeHtml(query)}"</div>
+            ${results.map(product => `
+                <a href="#productos" 
+                   class="search-result-card"
+                   onclick="SearchModule.close(); ProductsModule.filterByCategory('${product.cat}');">
+                    <img src="${product.image}" alt="${product.name}" class="search-result-img" loading="lazy"
+                         onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2264%22 height=%2264%22><rect fill=%22%23f3f4f6%22 width=%2264%22 height=%2264%22/></svg>'">
+                    <div class="search-result-info">
+                        <h4 class="search-result-name">${product.name}</h4>
+                        <span class="search-result-cat">${catName(product.cat)}</span>
+                        ${product.dimensions ? `<span class="search-result-dim">${product.dimensions}</span>` : ''}
+                        <span class="search-result-price">${Utils.formatCurrency(product.price)}</span>
+                    </div>
+                    <span class="material-symbols-outlined search-result-arrow" aria-hidden="true">arrow_forward</span>
+                </a>
+            `).join('')}
+        `;
     }
 };
 
@@ -1055,6 +1065,7 @@ const CartModule = {
 const ProductsModule = {
     init() {
         this.pillsContainer = Utils.$(CONFIG.SELECTORS.categoryPills);
+        this.sidebarContainer = Utils.$('#category-sidebar');
         this.grid = Utils.$(CONFIG.SELECTORS.productsGrid);
         this.loadMoreBtn = Utils.$(CONFIG.SELECTORS.loadMoreBtn);
         this.searchInput = Utils.$(CONFIG.SELECTORS.productSearch);
@@ -1083,6 +1094,15 @@ const ProductsModule = {
             const currentPage = AppStore.get('productsPage');
             AppStore.set('productsPage', currentPage + 1);
             this.renderProducts(true);
+        });
+
+        // Lightbox: click on card image to open
+        Utils.$(CONFIG.SELECTORS.productsGrid)?.addEventListener('click', (e) => {
+            const cardImage = e.target.closest('.c-card__image');
+            if (cardImage) {
+                const img = cardImage.querySelector('img');
+                if (img) LightboxModule.open(img.src, img.alt);
+            }
         });
     },
 
@@ -1130,37 +1150,68 @@ const ProductsModule = {
     },
 
     renderCategories() {
-        if (!this.pillsContainer) return;
-
         const categories = [
             { id: 'all', name: 'Todos', icon: 'grid_view' },
             ...Data.categories
         ];
 
-        this.pillsContainer.innerHTML = categories.map(cat => `
-            <button class="c-pill ${cat.id === 'all' ? CONFIG.CLASSES.pillActive : ''}" 
-                    role="tab"
-                    aria-selected="${cat.id === 'all'}"
-                    data-category="${cat.id}">
-                <span class="material-symbols-outlined" aria-hidden="true">${cat.icon}</span>
-                ${cat.name}
-            </button>
-        `).join('');
+        // Mobile pills
+        if (this.pillsContainer) {
+            this.pillsContainer.innerHTML = categories.map(cat => `
+                <button class="c-pill ${cat.id === 'all' ? CONFIG.CLASSES.pillActive : ''}" 
+                        role="tab"
+                        aria-selected="${cat.id === 'all'}"
+                        data-category="${cat.id}">
+                    <span class="material-symbols-outlined" aria-hidden="true">${cat.icon}</span>
+                    ${cat.name}
+                </button>
+            `).join('');
 
-        Utils.$$('button', this.pillsContainer).forEach(btn => {
-            btn.addEventListener('click', () => {
-                const category = btn.dataset.category;
-                this.filterByCategory(category);
+            Utils.$$('button', this.pillsContainer).forEach(btn => {
+                btn.addEventListener('click', () => {
+                    this.filterByCategory(btn.dataset.category);
+                });
             });
-        });
+        }
+
+        // Desktop sidebar
+        if (this.sidebarContainer) {
+            this.sidebarContainer.innerHTML = categories.map(cat => `
+                <button class="sidebar-cat ${cat.id === 'all' ? 'sidebar-cat--active' : ''}" 
+                        role="tab"
+                        aria-selected="${cat.id === 'all'}"
+                        data-category="${cat.id}">
+                    <span class="material-symbols-outlined" aria-hidden="true">${cat.icon}</span>
+                    ${cat.name}
+                </button>
+            `).join('');
+
+            Utils.$$('button', this.sidebarContainer).forEach(btn => {
+                btn.addEventListener('click', () => {
+                    this.filterByCategory(btn.dataset.category);
+                });
+            });
+        }
     },
 
     updatePillsUI(activeCategory) {
-        Utils.$$('button', this.pillsContainer).forEach(btn => {
-            const isActive = btn.dataset.category === activeCategory;
-            btn.classList.toggle(CONFIG.CLASSES.pillActive, isActive);
-            btn.setAttribute('aria-selected', isActive);
-        });
+        // Mobile pills
+        if (this.pillsContainer) {
+            Utils.$$('button', this.pillsContainer).forEach(btn => {
+                const isActive = btn.dataset.category === activeCategory;
+                btn.classList.toggle(CONFIG.CLASSES.pillActive, isActive);
+                btn.setAttribute('aria-selected', isActive);
+            });
+        }
+
+        // Desktop sidebar
+        if (this.sidebarContainer) {
+            Utils.$$('button', this.sidebarContainer).forEach(btn => {
+                const isActive = btn.dataset.category === activeCategory;
+                btn.classList.toggle('sidebar-cat--active', isActive);
+                btn.setAttribute('aria-selected', isActive);
+            });
+        }
     },
 
     renderProducts(append = false) {
@@ -1203,8 +1254,7 @@ const ProductsModule = {
             <article class="c-card c-card--hover reveal stagger-${(index % 4) + 1}" 
                      data-product-id="${product.id}"
                      role="listitem">
-                <div class="c-card__image cursor-pointer" 
-                     onclick="LightboxModule.open('${product.image}', '${Utils.escapeHtml(product.name)}')">
+                <div class="c-card__image cursor-pointer">
                     <img src="${product.image}" 
                          alt="${product.name}"
                          loading="lazy"
@@ -1219,7 +1269,7 @@ const ProductsModule = {
                     <h3 class="c-card__title">${product.name}</h3>
                     <p class="c-card__meta">${product.dimensions}</p>
                     <p class="c-card__price">${Utils.formatCurrency(product.price)}</p>
-                    <div class="flex gap-2 mt-3">
+                    <div class="c-card__actions flex gap-2 mt-3">
                         <button class="btn-add-cart flex-1 bg-dark-900 hover:bg-dark-800 text-white py-2.5 px-4 rounded-xl text-xs font-bold tracking-wide transition-all hover:-translate-y-0.5 hover:shadow-lg flex items-center justify-center gap-1.5"
                                 onclick="event.stopPropagation(); CartModule.addItem(${product.id})">
                             <span class="material-symbols-outlined text-sm" aria-hidden="true">add_shopping_cart</span>
@@ -1951,6 +2001,44 @@ const StoreStatusModule = {
 /* ═══════════════════════════════════════════════════════════════════════════════
    7. INIT - Application Bootstrap
    ═══════════════════════════════════════════════════════════════════════════════ */
+const HeaderCategoriesModule = {
+    init() {
+        this.container = Utils.$('#header-cat-list');
+        if (!this.container) return;
+
+        this.render();
+        this.bindEvents();
+    },
+
+    render() {
+        // Only show real categories (no 'Todos') in the header bar
+        this.container.innerHTML = Data.categories.map(cat => `
+            <button data-category="${cat.id}">${cat.name}</button>
+        `).join('');
+    },
+
+    bindEvents() {
+        this.container.addEventListener('click', (e) => {
+            const btn = e.target.closest('button');
+            if (!btn) return;
+
+            // Update active state in header bar
+            Utils.$$('button', this.container).forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Filter products
+            ProductsModule.filterByCategory(btn.dataset.category);
+        });
+
+        // Sync when products filter changes from elsewhere
+        AppStore.subscribe('currentCategory', (newCat) => {
+            Utils.$$('button', this.container).forEach(b => {
+                b.classList.toggle('active', b.dataset.category === newCat);
+            });
+        });
+    }
+};
+
 
 const App = {
     modules: [
@@ -1958,6 +2046,7 @@ const App = {
         StoreStatusModule,
         MobileMenuModule,
         SearchModule,
+        HeaderCategoriesModule,
         ProductsModule,
         CartModule,
         TestimonialsModule,
@@ -1981,7 +2070,7 @@ const App = {
         }
     },
 
-    bootstrap() {
+    async bootstrap() {
         const startTime = performance.now();
 
         // Agregar clase para indicar que JS está activo
@@ -1989,6 +2078,33 @@ const App = {
 
         console.log('%c🪑 Legado Muebles', 'font-size: 24px; font-weight: bold; color: #2E5C48;');
         console.log('%cInitializing application...', 'color: #6b7a73;');
+
+        // Try to load products from Firestore (replace hardcoded Data.products)
+        if (firestoreDb) {
+            try {
+                const snapshot = await firestoreDb.collection('products').get();
+                if (!snapshot.empty) {
+                    Data.products = snapshot.docs.map(doc => {
+                        const d = doc.data();
+                        return {
+                            id: doc.id,
+                            cat: d.cat,
+                            name: d.name,
+                            dimensions: d.dimensions || '',
+                            price: d.price,
+                            image: d.image,
+                            featured: d.featured || false,
+                            new: d.new || false
+                        };
+                    });
+                    console.log(`%c✓ ${Data.products.length} products loaded from Firestore`, 'color: #22c55e;');
+                } else {
+                    console.log('%c⚠ Firestore empty, using hardcoded data', 'color: #eab308;');
+                }
+            } catch (err) {
+                console.warn('Firestore read failed, using hardcoded data:', err.message);
+            }
+        }
 
         this.modules.forEach(module => {
             try {
@@ -2015,17 +2131,6 @@ App.init();
 // Recalcular offset del header cuando todo termina de cargar
 window.addEventListener('load', () => {
     window.scrollTo(0, 0);
-
-    const header = document.getElementById('header');
-    const topBar = document.getElementById('top-bar');
-    const main = document.getElementById('main');
-
-    if (!header || !main) return;
-
-    const topBarH = (topBar && getComputedStyle(topBar).display !== 'none')
-        ? topBar.offsetHeight
-        : 0;
-    main.style.paddingTop = (topBarH + header.offsetHeight) + 'px';
 });
 
 /* ═══════════════════════════════════════════════════════════════════════════════

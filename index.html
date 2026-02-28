@@ -46,6 +46,7 @@
     <link rel="apple-touch-icon" href="assets/logolegado.png">
 
     <!-- Fonts -->
+    <link rel="preload" href="assets/fonts/MaterialSymbolsOutlined.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -195,25 +196,16 @@
                     </a>
 
                     <!-- Center: Nav categories (desktop only) -->
-                    <nav id="header-nav" class="hidden lg:flex items-center gap-0 flex-1 justify-center"
-                        role="navigation" aria-label="Navegación principal">
-                        <a href="#inicio"
-                            class="nav-link px-4 py-2 text-[11.5px] font-semibold uppercase tracking-[0.14em] text-dark-300 hover:text-accent-400 hover:bg-white/[0.05] rounded transition-all duration-200"
-                            data-section="inicio">Tienda</a>
-
-                        <a href="#amedida"
-                            class="nav-link px-4 py-2 text-[11.5px] font-semibold uppercase tracking-[0.14em] text-dark-300 hover:text-accent-400 hover:bg-white/[0.05] rounded transition-all duration-200"
-                            data-section="amedida">A Medida</a>
-                        <a href="#galeria"
-                            class="nav-link px-4 py-2 text-[11.5px] font-semibold uppercase tracking-[0.14em] text-dark-300 hover:text-accent-400 hover:bg-white/[0.05] rounded transition-all duration-200"
-                            data-section="galeria">Galería</a>
-                        <a href="#testimonios"
-                            class="nav-link px-4 py-2 text-[11.5px] font-semibold uppercase tracking-[0.14em] text-dark-300 hover:text-accent-400 hover:bg-white/[0.05] rounded transition-all duration-200"
-                            data-section="testimonios">Testimonios</a>
-                        <a href="#contacto"
-                            class="nav-link px-4 py-2 text-[11.5px] font-semibold uppercase tracking-[0.14em] text-dark-300 hover:text-accent-400 hover:bg-white/[0.05] rounded transition-all duration-200"
-                            data-section="contacto">Contacto</a>
-                    </nav>
+                    <!-- Desktop Search Bar (always visible) -->
+                    <div id="desktop-search-bar" class="hidden sm:flex items-center flex-1 max-w-2xl mx-10">
+                        <div class="relative w-full">
+                            <span
+                                class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-dark-400 text-[20px] pointer-events-none">search</span>
+                            <input type="text" id="desktop-search-input"
+                                class="w-full bg-white/10 text-white text-sm py-2.5 pl-11 pr-4 rounded-full placeholder:text-dark-400 focus:outline-none focus:bg-white/15 border-0 transition-colors duration-200"
+                                placeholder="Buscar muebles, categorías..." autocomplete="off">
+                        </div>
+                    </div>
 
                     <!-- Right: Action icons -->
                     <div class="flex items-center gap-0.5 sm:gap-1 flex-shrink-0">
@@ -222,27 +214,6 @@
                             class="sm:hidden p-2.5 text-dark-300 hover:text-white rounded-full hover:bg-white/10 transition-all"
                             aria-label="Buscar">
                             <span class="material-symbols-outlined text-[22px]">search</span>
-                        </button>
-
-                        <!-- Desktop Search Trigger -->
-                        <button id="desktop-search-toggle"
-                            class="hidden sm:flex p-2.5 text-dark-300 hover:text-white rounded-full hover:bg-white/10 transition-all"
-                            aria-label="Buscar">
-                            <span class="material-symbols-outlined text-[22px]">search</span>
-                        </button>
-
-                        <!-- Profile -->
-                        <button id="profile-btn"
-                            class="hidden sm:flex p-2.5 text-dark-300 hover:text-white rounded-full hover:bg-white/10 transition-all"
-                            aria-label="Mi cuenta">
-                            <span class="material-symbols-outlined text-[22px]">person_outline</span>
-                        </button>
-
-                        <!-- Wishlist -->
-                        <button id="wishlist-btn"
-                            class="hidden sm:flex p-2.5 text-dark-300 hover:text-white rounded-full hover:bg-white/10 transition-all"
-                            aria-label="Favoritos">
-                            <span class="material-symbols-outlined text-[22px]">favorite_border</span>
                         </button>
 
                         <!-- Cart -->
@@ -278,7 +249,14 @@
             </div>
         </div>
 
-
+        <!-- Category Nav Bar -->
+        <div id="header-categories" class="bg-dark-950 border-b border-white/[0.06] hidden sm:block">
+            <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
+                <div id="header-cat-list" class="flex items-center gap-2 overflow-x-auto no-scrollbar py-2.5">
+                    <!-- JS fills this -->
+                </div>
+            </div>
+        </div>
 
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="lg:hidden hidden fixed inset-0 top-16 bg-dark-950 z-40 overflow-y-auto"
@@ -323,18 +301,6 @@
                 <hr class="my-4 border-white/10">
 
                 <!-- Mobile-only icons -->
-                <div class="flex items-center justify-center gap-4 mb-4">
-                    <button
-                        class="flex flex-col items-center gap-1 p-3 rounded-xl text-dark-300 hover:text-accent-400 hover:bg-white/[0.06] transition-all">
-                        <span class="material-symbols-outlined text-2xl">person_outline</span>
-                        <span class="text-[10px] font-semibold uppercase tracking-wider">Cuenta</span>
-                    </button>
-                    <button
-                        class="flex flex-col items-center gap-1 p-3 rounded-xl text-dark-300 hover:text-accent-400 hover:bg-white/[0.06] transition-all">
-                        <span class="material-symbols-outlined text-2xl">favorite_border</span>
-                        <span class="text-[10px] font-semibold uppercase tracking-wider">Favoritos</span>
-                    </button>
-                </div>
 
                 <a href="#cotizador"
                     class="flex items-center justify-center gap-3 bg-accent-500 text-dark-950 p-4 rounded-xl font-bold text-center transition-colors hover:bg-accent-600">
@@ -459,10 +425,128 @@
     </div>
 
     <!-- ============ MAIN ============ -->
-    <main id="main" class="pt-[120px] sm:pt-[164px]">
+    <main id="main" class="pt-[112px] sm:pt-[168px]">
+
+        <!-- ======= HERO SLIDER ======= -->
+        <section id="inicio" class="hero relative w-full overflow-hidden" aria-label="Banner principal">
+            <!-- Slides -->
+            <div class="hero-slide absolute inset-0 opacity-100 z-10 transition-opacity duration-700">
+                <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1920&q=80&auto=format&fit=crop"
+                    alt="Cocina moderna integral" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-r from-dark-950/80 via-dark-950/50 to-transparent"></div>
+                <div class="absolute inset-0 flex items-end pb-20">
+                    <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 w-full">
+                        <div class="max-w-xl">
+                            <span
+                                class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent-500/20 border border-accent-500/30 text-accent-400 text-xs font-semibold tracking-wide mb-6">
+                                <span class="material-symbols-outlined text-sm">verified</span>
+                                Fabricantes desde San Rafael
+                            </span>
+                            <h2
+                                class="text-4xl sm:text-5xl lg:text-6xl font-display font-black text-white leading-[1.1] mb-6">
+                                Muebles que transforman
+                                <span class="text-gradient italic">tu hogar</span>
+                            </h2>
+                            <p class="text-white/60 text-base sm:text-lg mb-8 max-w-md leading-relaxed">
+                                Diseños funcionales y modernos fabricados con melamina sobre MDF y pino de primera
+                                calidad.
+                            </p>
+                            <a href="#productos"
+                                class="inline-flex items-center gap-2 bg-accent-500 hover:bg-accent-600 text-dark-950 font-bold px-7 py-3.5 rounded-full text-sm shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
+                                <span class="material-symbols-outlined text-lg">storefront</span>
+                                Ver Catálogo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-slide absolute inset-0 opacity-0 z-0 transition-opacity duration-700">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=80&auto=format&fit=crop"
+                    alt="Living moderno completo" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-r from-dark-950/80 via-dark-950/50 to-transparent"></div>
+                <div class="absolute inset-0 flex items-end pb-20">
+                    <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 w-full">
+                        <div class="max-w-xl">
+                            <span
+                                class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent-500/20 border border-accent-500/30 text-accent-400 text-xs font-semibold tracking-wide mb-6">
+                                <span class="material-symbols-outlined text-sm">design_services</span>
+                                Proyectos a Medida
+                            </span>
+                            <h2
+                                class="text-4xl sm:text-5xl lg:text-6xl font-display font-black text-white leading-[1.1] mb-6">
+                                Fabricados a medida en
+                                <span class="text-gradient italic">San Rafael</span>
+                            </h2>
+                            <p class="text-white/60 text-base sm:text-lg mb-8 max-w-md leading-relaxed">
+                                Cada proyecto es único. Medimos, diseñamos y fabricamos exactamente lo que necesitás.
+                            </p>
+                            <a href="#cotizador"
+                                class="inline-flex items-center gap-2 bg-accent-500 hover:bg-accent-600 text-dark-950 font-bold px-7 py-3.5 rounded-full text-sm shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
+                                <span class="material-symbols-outlined text-lg">calculate</span>
+                                Pedí tu Presupuesto
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-slide absolute inset-0 opacity-0 z-0 transition-opacity duration-700">
+                <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1920&q=80&auto=format&fit=crop"
+                    alt="Escritorio home office moderno" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-r from-dark-950/80 via-dark-950/50 to-transparent"></div>
+                <div class="absolute inset-0 flex items-end pb-20">
+                    <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 w-full">
+                        <div class="max-w-xl">
+                            <span
+                                class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent-500/20 border border-accent-500/30 text-accent-400 text-xs font-semibold tracking-wide mb-6">
+                                <span class="material-symbols-outlined text-sm">workspace_premium</span>
+                                Calidad Artesanal
+                            </span>
+                            <h2
+                                class="text-4xl sm:text-5xl lg:text-6xl font-display font-black text-white leading-[1.1] mb-6">
+                                Calidad artesanal,
+                                <span class="text-gradient italic">diseño moderno</span>
+                            </h2>
+                            <p class="text-white/60 text-base sm:text-lg mb-8 max-w-md leading-relaxed">
+                                Herrajes premium, guías telescópicas y cierre suave. Instalación profesional incluida.
+                            </p>
+                            <a href="https://wa.me/5492604364497?text=Hola,%20me%20interesa%20agendar%20una%20visita"
+                                target="_blank" rel="noopener noreferrer"
+                                class="inline-flex items-center gap-2 bg-accent-500 hover:bg-accent-600 text-dark-950 font-bold px-7 py-3.5 rounded-full text-sm shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
+                                <span class="material-symbols-outlined text-lg">calendar_month</span>
+                                Agendar Visita Gratuita
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Arrows -->
+            <button id="hero-prev"
+                class="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm transition-all duration-300 hover:scale-110"
+                aria-label="Slide anterior">
+                <span class="material-symbols-outlined text-2xl">chevron_left</span>
+            </button>
+            <button id="hero-next"
+                class="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm transition-all duration-300 hover:scale-110"
+                aria-label="Slide siguiente">
+                <span class="material-symbols-outlined text-2xl">chevron_right</span>
+            </button>
+
+            <!-- Indicators -->
+            <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
+                <button class="hero-indicator h-1.5 rounded-full bg-white w-8 active transition-all duration-300"
+                    data-index="0" aria-label="Slide 1"></button>
+                <button class="hero-indicator h-1.5 rounded-full bg-white/40 w-3 transition-all duration-300"
+                    data-index="1" aria-label="Slide 2"></button>
+                <button class="hero-indicator h-1.5 rounded-full bg-white/40 w-3 transition-all duration-300"
+                    data-index="2" aria-label="Slide 3"></button>
+            </div>
+        </section>
 
         <!-- ======= PRODUCTS ======= -->
-        <section id="inicio" class="pt-6 pb-20 md:pt-10 md:pb-28 bg-white" aria-labelledby="productos-heading">
+        <section id="productos" class="pt-6 pb-20 md:pt-10 md:pb-28 bg-white" aria-labelledby="productos-heading">
             <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
 
                 <!-- Store Header -->
@@ -481,23 +565,39 @@
                     </p>
                 </div>
 
-                <!-- Category Pills -->
+                <!-- Mobile Category Pills (visible < lg) -->
                 <div id="category-pills"
-                    class="pills-container flex gap-2 mb-12 reveal overflow-x-auto pb-3 -mx-5 px-5 snap-x snap-mandatory no-scrollbar lg:flex-wrap lg:justify-center lg:overflow-visible lg:mx-0 lg:px-0 lg:pb-0"
+                    class="category-pills-mobile pills-container flex gap-2 mb-8 reveal overflow-x-auto pb-3 -mx-5 px-5 snap-x snap-mandatory no-scrollbar lg:hidden"
                     role="tablist" aria-label="Categorías"></div>
 
-                <!-- Products Grid -->
-                <div id="products-grid"
-                    class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6" role="list">
-                </div>
+                <!-- Desktop: Sidebar + Grid layout -->
+                <div class="products-layout">
 
-                <!-- Load More -->
-                <div class="mt-14 text-center">
-                    <button id="load-more-btn"
-                        class="inline-flex items-center gap-2 border border-dark-200 hover:bg-dark-50 text-dark-600 px-8 py-3.5 rounded-full font-semibold text-sm transition-all duration-300 hover:shadow-sm">
-                        Cargar más productos
-                        <span class="material-symbols-outlined text-lg">expand_more</span>
-                    </button>
+                    <!-- Sidebar (desktop only) -->
+                    <aside class="products-sidebar hidden lg:block">
+                        <div class="sidebar-sticky">
+                            <h3 class="text-xs font-bold uppercase tracking-[0.15em] text-dark-400 mb-4">Categorías</h3>
+                            <div id="category-sidebar" class="flex flex-col gap-1" role="tablist"
+                                aria-label="Categorías"></div>
+                        </div>
+                    </aside>
+
+                    <!-- Products content -->
+                    <div class="products-content">
+                        <!-- Products Grid -->
+                        <div id="products-grid" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
+                            role="list">
+                        </div>
+
+                        <!-- Load More -->
+                        <div class="mt-14 text-center">
+                            <button id="load-more-btn"
+                                class="inline-flex items-center gap-2 border border-dark-200 hover:bg-dark-50 text-dark-600 px-8 py-3.5 rounded-full font-semibold text-sm transition-all duration-300 hover:shadow-sm">
+                                Cargar más productos
+                                <span class="material-symbols-outlined text-lg">expand_more</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -759,16 +859,11 @@
     </a>
 
     <!-- ============ LIGHTBOX ============ -->
-    <div id="lightbox"
-        class="lightbox fixed inset-0 z-[9999] bg-black/95 flex items-center justify-center opacity-0 invisible transition-all duration-300 print:hidden"
-        role="dialog" aria-modal="true">
-        <button id="lightbox-close"
-            class="absolute top-4 right-4 sm:top-6 sm:right-6 p-3 text-white/50 hover:text-white rounded-full hover:bg-white/10 transition-all z-10"
-            aria-label="Cerrar">
+    <div id="lightbox" class="c-lightbox" role="dialog" aria-modal="true">
+        <button id="lightbox-close" class="c-lightbox__close" aria-label="Cerrar">
             <span class="material-symbols-outlined text-3xl">close</span>
         </button>
-        <img id="lightbox-img" src="" alt=""
-            class="max-w-[90vw] max-h-[85vh] object-contain rounded-lg transform scale-90 transition-transform duration-300">
+        <img id="lightbox-img" src="" alt="" class="c-lightbox__image">
     </div>
 
     <!-- ============ TOAST ============ -->
@@ -783,6 +878,10 @@
         <span class="material-symbols-outlined text-sm align-middle mr-1">wifi_off</span>
         Sin conexion - Mostrando contenido guardado
     </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 
     <!-- DESPUÉS -->
     <script src="main.js" defer></script>
