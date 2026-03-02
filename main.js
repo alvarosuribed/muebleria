@@ -2040,8 +2040,61 @@ const HeaderCategoriesModule = {
 };
 
 
+/* ═══════════════════════════════════════════════════════════════════════════════
+   THEME MODULE — Dark / Light Mode Toggle
+   ═══════════════════════════════════════════════════════════════════════════════ */
+const ThemeModule = {
+    STORAGE_KEY: 'legado_theme',
+
+    init() {
+        this.toggle = Utils.$('#theme-toggle');
+        this.icon = Utils.$('#theme-icon');
+        if (!this.toggle) return;
+
+        this.applyInitialTheme();
+        this.bindEvents();
+    },
+
+    applyInitialTheme() {
+        const saved = localStorage.getItem(this.STORAGE_KEY);
+        if (saved) {
+            this.setTheme(saved, false);
+        } else {
+            // Respect system preference
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            this.setTheme(prefersDark ? 'dark' : 'light', false);
+        }
+    },
+
+    bindEvents() {
+        this.toggle.addEventListener('click', () => {
+            const current = document.documentElement.getAttribute('data-theme');
+            this.setTheme(current === 'dark' ? 'light' : 'dark', true);
+        });
+
+        // Listen for system preference changes (only if no saved preference)
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem(this.STORAGE_KEY)) {
+                this.setTheme(e.matches ? 'dark' : 'light', false);
+            }
+        });
+    },
+
+    setTheme(theme, save = true) {
+        document.documentElement.setAttribute('data-theme', theme);
+        if (this.icon) {
+            this.icon.textContent = theme === 'dark' ? 'light_mode' : 'dark_mode';
+        }
+        if (save) {
+            localStorage.setItem(this.STORAGE_KEY, theme);
+        }
+    }
+};
+
+
 const App = {
     modules: [
+        ThemeModule,
         HeaderModule,
         StoreStatusModule,
         MobileMenuModule,

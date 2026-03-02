@@ -186,10 +186,12 @@
                         aria-label="Legado Muebles - Inicio">
                         <img src="assets/logolegado.png" alt="Legado Muebles Logo"
                             class="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover shadow-lg group-hover:scale-105 transition-all duration-300">
-                        <div class="hidden sm:flex flex-col justify-center">
-                            <span class="text-xl font-bold tracking-[0.06em] text-white leading-tight">LEGADO
+                        <div class="flex flex-col justify-center">
+                            <span
+                                class="block w-[140px] sm:w-auto text-[11px] sm:text-xl font-bold tracking-[0.15em] sm:tracking-[0.06em] uppercase text-white leading-tight">LEGADO
                                 MUEBLES</span>
-                            <span class="text-[11px] font-semibold tracking-[0.2em] uppercase text-accent-500 mt-0.5">
+                            <span
+                                class="block w-[140px] sm:w-auto text-[6px] sm:text-[11px] font-semibold tracking-[0.18em] sm:tracking-[0.2em] uppercase text-accent-500 mt-0.5">
                                 SAN RAFAEL&nbsp;&middot;&nbsp;MENDOZA
                             </span>
                         </div>
@@ -224,6 +226,13 @@
                             <span id="cart-badge" class="cart-badge">0</span>
                         </button>
 
+                        <!-- Theme Toggle -->
+                        <button id="theme-toggle"
+                            class="p-2.5 text-dark-300 hover:text-white rounded-full hover:bg-white/10 transition-all"
+                            aria-label="Cambiar tema">
+                            <span class="material-symbols-outlined text-[22px]" id="theme-icon">dark_mode</span>
+                        </button>
+
                         <!-- Mobile Menu Button -->
                         <button id="mobile-menu-btn"
                             class="lg:hidden p-2.5 text-white rounded-full hover:bg-white/10 transition-colors ml-1"
@@ -235,12 +244,12 @@
 
                 <!-- Mobile Search Bar -->
                 <div id="mobile-search-bar" class="sm:hidden hidden pb-3">
-                    <div class="relative">
+                    <div class="relative overflow-hidden rounded-full">
                         <input type="text" id="mobile-search-input"
-                            class="w-full bg-white rounded-full py-3 pl-5 pr-12 text-sm text-dark-900 placeholder:text-dark-400 focus:outline-none focus:ring-2 focus:ring-accent-500/50"
+                            class="w-full bg-white rounded-full py-3 pl-5 pr-14 text-sm text-dark-900 placeholder:text-dark-400 focus:outline-none focus:ring-2 focus:ring-accent-500/50"
                             placeholder="Buscar muebles..." autocomplete="off">
                         <button
-                            class="absolute right-1.5 top-1/2 -translate-y-1/2 bg-accent-500 hover:bg-accent-600 text-dark-950 p-2 rounded-full transition-colors"
+                            class="absolute right-2 top-1/2 -translate-y-1/2 bg-accent-500 hover:bg-accent-600 text-dark-950 p-2 rounded-full transition-colors"
                             aria-label="Buscar">
                             <span class="material-symbols-outlined text-lg leading-none">search</span>
                         </button>
@@ -250,7 +259,7 @@
         </div>
 
         <!-- Category Nav Bar -->
-        <div id="header-categories" class="bg-dark-950 border-b border-white/[0.06] hidden sm:block">
+        <div id="header-categories" class="bg-dark-950 border-b border-white/[0.06]">
             <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
                 <div id="header-cat-list" class="flex items-center gap-2 overflow-x-auto no-scrollbar py-2.5">
                     <!-- JS fills this -->
@@ -267,15 +276,10 @@
                     <span class="material-symbols-outlined text-accent-500">home</span>
                     Inicio
                 </a>
-                <a href="#nosotros"
-                    class="mobile-nav-link flex items-center gap-4 p-4 rounded-xl font-medium text-dark-200 hover:bg-white/[0.06] transition-colors">
-                    <span class="material-symbols-outlined text-accent-500">groups</span>
-                    Quiénes Somos
-                </a>
                 <a href="#productos"
                     class="mobile-nav-link flex items-center gap-4 p-4 rounded-xl font-medium text-dark-200 hover:bg-white/[0.06] transition-colors">
                     <span class="material-symbols-outlined text-accent-500">storefront</span>
-                    Tienda Online
+                    Tienda
                 </a>
                 <a href="#amedida"
                     class="mobile-nav-link flex items-center gap-4 p-4 rounded-xl font-medium text-dark-200 hover:bg-white/[0.06] transition-colors">
@@ -292,6 +296,11 @@
                     <span class="material-symbols-outlined text-accent-500">format_quote</span>
                     Testimonios
                 </a>
+                <a href="#cotizador"
+                    class="mobile-nav-link flex items-center gap-4 p-4 rounded-xl font-medium text-dark-200 hover:bg-white/[0.06] transition-colors">
+                    <span class="material-symbols-outlined text-accent-500">calculate</span>
+                    Cotizador
+                </a>
                 <a href="#contacto"
                     class="mobile-nav-link flex items-center gap-4 p-4 rounded-xl font-medium text-dark-200 hover:bg-white/[0.06] transition-colors">
                     <span class="material-symbols-outlined text-accent-500">location_on</span>
@@ -299,8 +308,6 @@
                 </a>
 
                 <hr class="my-4 border-white/10">
-
-                <!-- Mobile-only icons -->
 
                 <a href="#cotizador"
                     class="flex items-center justify-center gap-3 bg-accent-500 text-dark-950 p-4 rounded-xl font-bold text-center transition-colors hover:bg-accent-600">
@@ -425,7 +432,7 @@
     </div>
 
     <!-- ============ MAIN ============ -->
-    <main id="main" class="pt-[112px] sm:pt-[168px]">
+    <main id="main" class="pt-[152px] sm:pt-[168px]">
 
         <!-- ======= HERO SLIDER ======= -->
         <section id="inicio" class="hero relative w-full overflow-hidden" aria-label="Banner principal">
@@ -524,12 +531,12 @@
 
             <!-- Navigation Arrows -->
             <button id="hero-prev"
-                class="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm transition-all duration-300 hover:scale-110"
+                class="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-20 p-2.5 sm:p-3 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm transition-all duration-300 hover:scale-110"
                 aria-label="Slide anterior">
                 <span class="material-symbols-outlined text-2xl">chevron_left</span>
             </button>
             <button id="hero-next"
-                class="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm transition-all duration-300 hover:scale-110"
+                class="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-20 p-2.5 sm:p-3 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm transition-all duration-300 hover:scale-110"
                 aria-label="Slide siguiente">
                 <span class="material-symbols-outlined text-2xl">chevron_right</span>
             </button>
@@ -763,8 +770,9 @@
                 <div class="w-full overflow-hidden shadow-2xl rounded-3xl reveal">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3361.473370312494!2d-68.33228868481937!3d-34.61770008045413!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9678a7e7e8e2e7b7%3A0x6e7e7e7e7e7e7e7e!2sAv.%20Mitre%20839%2C%20San%20Rafael%2C%20Mendoza%2C%20Argentina!5e0!3m2!1ses-419!2sar!4v1680000000000!5m2!1ses-419!2sar"
-                        width="100%" height="850" style="border:0;" allowfullscreen="" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade" title="Mapa Legado Muebles"></iframe>
+                        width="100%" height="450" class="h-[300px] sm:h-[400px] lg:h-[500px]" style="border:0;"
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                        title="Mapa Legado Muebles"></iframe>
                 </div>
             </div>
         </section>

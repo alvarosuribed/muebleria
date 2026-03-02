@@ -4236,3 +4236,238 @@ hr {
     transform: translateX(3px);
     color: var(--color-dark-500, #6b7280);
 }
+
+
+/* ═══════════════════════════════════════════════════════════════════════════════
+   DARK MODE
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+/* Smooth transition for theme changes */
+body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="dark"] {
+    /* Override semantic tokens */
+    --color-bg: #1a1a1a;
+    --color-bg-alt: #1e1e1e;
+    --color-surface: #242424;
+    --color-surface-elevated: #2a2a2a;
+    --color-border: rgba(255, 255, 255, 0.08);
+    --color-border-strong: rgba(255, 255, 255, 0.15);
+    --color-text-primary: #e8e8e8;
+    --color-text-secondary: #a0a0a0;
+    --color-text-muted: #808080;
+    --color-text-disabled: #606060;
+    --color-text-inverse: #1a1a1a;
+    --color-text-link: var(--color-primary-400);
+    --color-text-link-hover: var(--color-primary-300);
+    --color-gray-50: #1a1a1a;
+    --color-gray-100: #242424;
+    --color-gray-200: #333333;
+    --color-gray-300: #444444;
+    --color-gray-900: #e8e8e8;
+    --color-gray-950: #f0f0f0;
+    color-scheme: dark;
+}
+
+/* Body bg + text */
+[data-theme="dark"] body {
+    background-color: #1a1a1a;
+    color: #e8e8e8;
+}
+
+/* Content sections that use bg-white */
+[data-theme="dark"] section[class*="bg-white"],
+[data-theme="dark"] div[class*="bg-white"] {
+    background-color: #1a1a1a !important;
+}
+
+/* Alt background sections */
+[data-theme="dark"] section[class*="bg-dark-50"],
+[data-theme="dark"] div[class*="bg-dark-50"] {
+    background-color: #1e1e1e !important;
+}
+
+/* Main content area */
+[data-theme="dark"] main {
+    background-color: #1a1a1a;
+}
+
+/* Headings */
+[data-theme="dark"] h1:not([class*="text-white"]),
+[data-theme="dark"] h2:not([class*="text-white"]),
+[data-theme="dark"] h3:not([class*="text-white"]),
+[data-theme="dark"] h4:not([class*="text-white"]) {
+    color: #e8e8e8 !important;
+}
+
+/* Dark text overrides */
+[data-theme="dark"] [class*="text-dark-950"]:not(header *):not(footer *):not(nav *):not(#mobile-menu *) {
+    color: #f0f0f0 !important;
+}
+
+[data-theme="dark"] [class*="text-dark-900"]:not(header *):not(footer *):not(nav *):not(#mobile-menu *) {
+    color: #e8e8e8 !important;
+}
+
+[data-theme="dark"] [class*="text-dark-800"]:not(header *):not(footer *):not(nav *):not(#mobile-menu *) {
+    color: #d0d0d0 !important;
+}
+
+[data-theme="dark"] [class*="text-dark-700"]:not(header *):not(footer *):not(nav *):not(#mobile-menu *) {
+    color: #b0b0b0 !important;
+}
+
+[data-theme="dark"] [class*="text-dark-600"]:not(header *):not(footer *):not(nav *):not(#mobile-menu *) {
+    color: #a0a0a0 !important;
+}
+
+[data-theme="dark"] [class*="text-dark-500"]:not(header *):not(footer *):not(nav *):not(#mobile-menu *) {
+    color: #909090 !important;
+}
+
+[data-theme="dark"] [class*="text-dark-400"]:not(header *):not(footer *):not(nav *):not(#mobile-menu *) {
+    color: #808080 !important;
+}
+
+/* Cards */
+[data-theme="dark"] .c-card {
+    background-color: #242424;
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .c-card__image {
+    background-color: #2a2a2a !important;
+}
+
+/* Badges & pills */
+[data-theme="dark"] [class*="bg-dark-950/5"],
+[data-theme="dark"] [class*="bg-dark-950\\/5"] {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-theme="dark"] [class*="border-dark-900/10"],
+[data-theme="dark"] [class*="border-dark-900\\/10"] {
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Category pills */
+[data-theme="dark"] .c-pill {
+    background-color: #2a2a2a;
+    color: #a0a0a0;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .c-pill.c-pill--active,
+[data-theme="dark"] .c-pill:hover {
+    background-color: var(--color-primary-600);
+    color: #fff;
+}
+
+/* Sidebar categories */
+[data-theme="dark"] .sidebar-cat {
+    color: #a0a0a0;
+}
+
+[data-theme="dark"] .sidebar-cat:hover,
+[data-theme="dark"] .sidebar-cat--active {
+    background-color: rgba(255, 255, 255, 0.06);
+    color: var(--color-primary-400);
+}
+
+/* Buttons with borders */
+[data-theme="dark"] [class*="border-dark-200"]:not(header *):not(footer *) {
+    border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+[data-theme="dark"] [class*="hover\\:bg-dark-50"]:hover {
+    background-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+/* Inputs */
+[data-theme="dark"] input:not(header input):not(#mobile-search-input),
+[data-theme="dark"] textarea,
+[data-theme="dark"] select {
+    background-color: #2a2a2a !important;
+    color: #e8e8e8 !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder {
+    color: #666 !important;
+}
+
+/* Search modal */
+[data-theme="dark"] #search-container {
+    background-color: #242424;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .search-result-card {
+    background-color: #2a2a2a;
+}
+
+[data-theme="dark"] .search-result-card:hover {
+    background-color: #333;
+}
+
+[data-theme="dark"] .search-result-name {
+    color: #e8e8e8 !important;
+}
+
+/* Glass effect in dark mode */
+[data-theme="dark"] .c-glass {
+    background: rgba(30, 30, 30, 0.9);
+}
+
+[data-theme="dark"] .c-glass--strong {
+    background: rgba(36, 36, 36, 0.95);
+}
+
+/* Quote form section */
+[data-theme="dark"] [class*="bg-gradient-to-br"][class*="from-dark-50"] {
+    background: #1e1e1e !important;
+}
+
+/* Testimonial cards */
+[data-theme="dark"] [class*="bg-dark-50\\/50"],
+[data-theme="dark"] [class*="bg-dark-50/50"] {
+    background-color: #242424 !important;
+}
+
+/* Gallery */
+[data-theme="dark"] .c-gallery__overlay {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* Scrollbar */
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+    background: #444;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary-500);
+}
+
+[data-theme="dark"] * {
+    scrollbar-color: #444 transparent;
+}
+
+/* Lightbox */
+[data-theme="dark"] #lightbox {
+    background-color: rgba(0, 0, 0, 0.95);
+}
+
+/* Toast */
+[data-theme="dark"] #toast {
+    background-color: #333;
+    color: #e8e8e8;
+}
+
+/* Selection */
+[data-theme="dark"] ::selection {
+    background-color: var(--color-primary-600);
+    color: #fff;
+}
