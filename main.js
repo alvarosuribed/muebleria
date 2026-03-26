@@ -1053,6 +1053,9 @@ const CartModule = {
         // Checkout button
         this.checkoutBtn?.addEventListener('click', () => this.checkoutWhatsApp());
 
+        // Secondary WhatsApp button
+        Utils.$('#cart-whatsapp-btn')?.addEventListener('click', () => this.checkoutWhatsApp());
+
         // Close on Escape
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && this.drawer?.classList.contains('cart-drawer--open')) {
@@ -1063,6 +1066,18 @@ const CartModule = {
 };
 
 const ProductsModule = {
+    preInit() {
+        this.grid = Utils.$(CONFIG.SELECTORS.productsGrid);
+        this.showSkeleton();
+    },
+
+    showSkeleton(count = 6) {
+        if (!this.grid) return;
+        this.grid.innerHTML = Array.from({ length: count }, () =>
+            '<div class="c-skeleton" style="border-radius:1rem;aspect-ratio:3/4;min-height:280px;"></div>'
+        ).join('');
+    },
+
     init() {
         this.pillsContainer = Utils.$(CONFIG.SELECTORS.categoryPills);
         this.sidebarContainer = Utils.$('#category-sidebar');
@@ -1667,6 +1682,12 @@ const HeroSliderModule = {
 
         if (this.slides.length === 0) return;
 
+        if (this.slides.length === 1) {
+            this.currentSlide = 0;
+            this.update();
+            return;
+        }
+
         this.bindEvents();
         this.startAutoPlay();
         this.update(); // Set initial state
@@ -1728,13 +1749,7 @@ const HeroSliderModule = {
     update() {
         // Update slides
         this.slides.forEach((slide, index) => {
-            if (index === this.currentSlide) {
-                slide.classList.remove('opacity-0', 'z-0');
-                slide.classList.add('opacity-100', 'z-10');
-            } else {
-                slide.classList.remove('opacity-100', 'z-10');
-                slide.classList.add('opacity-0', 'z-0');
-            }
+            slide.classList.toggle('hero-slide--active', index === this.currentSlide);
         });
 
         // Update indicators
@@ -1948,12 +1963,12 @@ const StoreStatusModule = {
 
         const dot = isOpen
             ? 'w-1.5 h-1.5 rounded-full bg-green-400'
-            : 'w-1.5 h-1.5 rounded-full bg-red-400';
+            : 'w-1.5 h-1.5 rounded-full bg-amber-300';
 
         const label = isOpen ? 'Abierto ahora' : 'Cerrado';
-        const labelColor = isOpen ? 'text-green-400' : 'text-red-400';
+        const labelColor = isOpen ? 'text-green-300 font-semibold' : 'text-amber-200 font-semibold';
         const extra = nextChange
-            ? `<span class="text-dark-500 hidden lg:inline"> · ${Utils.escapeHtml(nextChange)}</span>`
+            ? `<span class="text-dark-300 hidden lg:inline"> · ${Utils.escapeHtml(nextChange)}</span>`
             : '';
 
         this.el.innerHTML = `
@@ -2002,6 +2017,12 @@ const StoreStatusModule = {
    7. INIT - Application Bootstrap
    ═══════════════════════════════════════════════════════════════════════════════ */
 const HeaderCategoriesModule = {
+    preInit() {
+        this.container = Utils.$('#header-cat-list');
+        if (!this.container) return;
+        this.render();
+    },
+
     init() {
         this.container = Utils.$('#header-cat-list');
         if (!this.container) return;
@@ -2128,6 +2149,9 @@ const App = {
 
         // Agregar clase para indicar que JS está activo
         document.documentElement.classList.add('js-enabled');
+
+        ProductsModule.preInit();
+        HeaderCategoriesModule.preInit();
 
         console.log('%c🪑 Legado Muebles', 'font-size: 24px; font-weight: bold; color: #2E5C48;');
         console.log('%cInitializing application...', 'color: #6b7a73;');

@@ -29,20 +29,6 @@ const CLOUDINARY = {
     }
 };
 
-// ──── Categories (for select dropdown) ────
-const CATEGORIES = [
-    { id: 'mesitas', name: 'Mesitas de Luz', icon: 'bed' },
-    { id: 'racks', name: 'Racks TV', icon: 'tv' },
-    { id: 'escritorios', name: 'Escritorios', icon: 'desk' },
-    { id: 'cocina', name: 'Cocina', icon: 'kitchen' },
-    { id: 'roperos', name: 'Placards', icon: 'door_sliding' },
-    { id: 'espejos', name: 'Espejos', icon: 'checkroom' },
-    { id: 'estanterias', name: 'Estanterías', icon: 'shelves' },
-    { id: 'vanitory', name: 'Vanitorys', icon: 'water_drop' },
-    { id: 'organizadores', name: 'Organizadores', icon: 'view_agenda' },
-    { id: 'juegos', name: 'Juegos', icon: 'table_restaurant' },
-];
-
 // ──── DOM Elements ────
 const $ = (s) => document.querySelector(s);
 const $$ = (s) => Array.from(document.querySelectorAll(s));
@@ -120,6 +106,7 @@ dom.loginForm.addEventListener('submit', async (e) => {
             dom.loginPass.value
         );
     } catch (err) {
+        await new Promise(r => setTimeout(r, 1000));
         dom.loginError.textContent = getAuthError(err.code);
         dom.loginError.hidden = false;
         dom.loginBtn.disabled = false;
@@ -231,10 +218,10 @@ function renderTable() {
                 <td>${badges}</td>
                 <td class="actions-cell">
                     <div class="actions-wrapper">
-                        <button class="btn btn-ghost btn-sm" onclick="editProduct('${p.firestoreId}')" title="Editar">
+                        <button class="btn btn-ghost btn-sm" data-action="edit" data-id="${p.firestoreId}" title="Editar">
                             <span class="material-symbols-outlined">edit</span>
                         </button>
-                        <button class="btn btn-sm" style="color:var(--danger)" onclick="deleteProduct('${p.firestoreId}', '${p.name.replace(/'/g, "\\'")}')" title="Eliminar">
+                        <button class="btn btn-sm" style="color:var(--danger)" data-action="delete" data-id="${p.firestoreId}" data-name="${p.name.replace(/"/g, '&quot;')}" title="Eliminar">
                             <span class="material-symbols-outlined">delete</span>
                         </button>
                     </div>
@@ -295,6 +282,14 @@ dom.addBtn.addEventListener('click', () => {
 dom.modalClose.addEventListener('click', closeModal);
 dom.modalCancel.addEventListener('click', closeModal);
 $('.modal-overlay').addEventListener('click', closeModal);
+
+dom.tbody.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-action]');
+    if (!btn) return;
+    const { action, id, name } = btn.dataset;
+    if (action === 'edit') editProduct(id);
+    else if (action === 'delete') deleteProduct(id, name);
+});
 
 // ═══════════════════════════════════════════════════
 // CLOUDINARY IMAGE UPLOAD
@@ -382,7 +377,7 @@ dom.removeImage.addEventListener('click', (e) => {
 });
 
 // Edit product — fill form
-window.editProduct = function (firestoreId) {
+function editProduct(firestoreId) {
     const p = products.find(x => x.firestoreId === firestoreId);
     if (!p) return;
 
@@ -400,10 +395,7 @@ window.editProduct = function (firestoreId) {
     }
 
     openModal('Editar Producto');
-};
-
-// Make deleteProduct global for onclick
-window.deleteProduct = deleteProduct;
+}
 
 // Save product
 dom.productForm.addEventListener('submit', async (e) => {
